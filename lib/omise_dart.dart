@@ -3,6 +3,6 @@
 /// More dartdocs go here.
 library;
 
-export 'src/omise_dart_base.dart';
+export 'src/omise_http_client.dart';
 
 // TODO: Export any libraries intended for clients of this package.
