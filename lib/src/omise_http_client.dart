@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
-import 'package:omise_dart/src/enums/api_version.dart';
 import 'package:omise_dart/src/enums/environment.dart';
 import 'package:omise_dart/src/enums/omise_api_errors.dart';
 import 'package:omise_dart/src/exceptions/omise_api_exception.dart';
@@ -43,7 +42,7 @@ class OmiseHttpClient {
   String baseUrl = Environment.baseUrl.value;
 
   /// The version of the Omise API to use.
-  String apiVersion = ApiVersion.version2019.value;
+  String apiVersion = "2019-05-29";
 
   /// The user agent string to include in requests.
   final String? userAgent;
