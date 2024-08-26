@@ -86,9 +86,11 @@ class OmiseHttpClient {
   /// Returns the HTTP headers required for Omise API requests.
   Future<Map<String, String>> getHeaders() async {
     final userAgent = await getUserAgent();
+    // Base64 encode the secret key
+    String encodedKey = Utils.base64encodeString(secretKey);
     return {
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer $publicKey',
+      'Authorization': 'Basic $encodedKey',
       'User-Agent': userAgent,
       'Omise-Version': apiVersion,
     };
