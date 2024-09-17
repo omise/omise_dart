@@ -2,9 +2,7 @@ import 'package:omise_dart/omise_dart.dart';
 
 Future<void> main() async {
   final omiseApi = OmiseApi(
-      publicKey: "pkey_test_5tnt1gxjf6ecypmkfi8",
-      //secretKey: "123",
-      enableDebug: true);
+      publicKey: "test_pkey", secretKey: "test_skey", enableDebug: true);
   final token = await omiseApi.tokens.create(CreateTokenRequest(
       name: "Anas",
       number: "4242424242424242",
