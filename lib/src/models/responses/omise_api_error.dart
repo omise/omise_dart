@@ -12,10 +12,10 @@ class OmiseApiError {
   });
 
   factory OmiseApiError.fromJson(Map<String, dynamic> data) => OmiseApiError(
-        object: data['object'] as String,
-        location: data['location'] as String,
-        code: data['code'] as String,
-        message: data['message'] as String,
+        object: data['object'],
+        location: data['location'],
+        code: data['code'],
+        message: data['message'],
       );
 
   Map<String, dynamic> toJson() => {

@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:http/testing.dart';
 import 'package:omise_dart/src/enums/environment.dart';
+import 'package:omise_dart/src/omise_http_client.dart';
 import 'package:test/test.dart';
 import 'package:http/http.dart' as http;
-import 'package:omise_dart/omise_dart.dart';
 import 'package:omise_dart/src/exceptions/omise_api_exception.dart';
 
 void main() {
@@ -43,6 +43,21 @@ void main() {
         throwsA(isA<OmiseApiException>()),
       );
     });
+    test('No error if one valid key is provided', () {
+      // Expect no error when creating OmiseHttpClient with a valid public key
+      expect(
+        () {
+          try {
+            OmiseHttpClient(
+              publicKey: '123',
+            );
+          } catch (e) {
+            fail('Expected no error, but caught an exception: $e');
+          }
+        },
+        returnsNormally,
+      );
+    });
     test('get sends GET request to the correct URL', () async {
       final getPath = "/getPath";
       final response = await client.get(getPath);
@@ -64,7 +79,7 @@ void main() {
 
     test('patch sends PATCH request with correct body', () async {
       final patchPath = "/patchPath";
-      final response = await client.post(
+      final response = await client.patch(
         patchPath,
         body: {'key3': 'value3'},
       );

@@ -6,6 +6,7 @@ import 'package:omise_dart/src/enums/environment.dart';
 import 'package:omise_dart/src/enums/omise_api_errors.dart';
 import 'package:omise_dart/src/exceptions/omise_api_exception.dart';
 import 'package:omise_dart/src/utils.dart';
+import 'package:omise_dart/src/extensions/remove_null_map_keys.dart';
 
 /// A simple HTTP client for interacting with the Omise API.
 ///
@@ -22,13 +23,15 @@ class OmiseHttpClient {
   /// is thrown. The [httpClient] is used to make HTTP requests. If not provided,
   /// a default [http.Client] is used.
   OmiseHttpClient({
-    required this.publicKey,
-    required this.secretKey,
+    this.publicKey,
+    this.secretKey,
     this.userAgent,
     http.Client? httpClient,
     this.enableDebug = false,
+    this.ignoreNullKeys = true,
   }) : _httpClient = httpClient ?? http.Client() {
-    if (publicKey.isEmpty && secretKey.isEmpty) {
+    if ([null, true].contains(publicKey?.isEmpty) &&
+        [null, true].contains(secretKey?.isEmpty)) {
       throw OmiseApiException(
         message: OmiseApiErrors.bothKeysAreInvalid.message,
       );
@@ -42,19 +45,22 @@ class OmiseHttpClient {
   String baseUrl = Environment.baseUrl.value;
 
   /// The version of the Omise API to use.
-  String apiVersion = "2019-05-29";
+  final String apiVersion = "2019-05-29";
 
   /// The user agent string to include in requests.
   final String? userAgent;
 
   /// The public key used for authenticating with the Omise API.
-  final String publicKey;
+  final String? publicKey;
 
   /// The secret key used for authenticating with the Omise API.
-  final String secretKey;
+  final String? secretKey;
 
   /// Wether to print all the api responses or not
   final bool? enableDebug;
+
+  /// Wether to send keys with null values in the request body or not
+  final bool? ignoreNullKeys;
 
   /// Retrieves a user agent string that includes the Dart SDK version, the SDK package information,
   /// and the operating system details.
@@ -84,10 +90,12 @@ class OmiseHttpClient {
   }
 
   /// Returns the HTTP headers required for Omise API requests.
-  Future<Map<String, String>> getHeaders() async {
+  Future<Map<String, String>> getHeaders(String path) async {
     final userAgent = await getUserAgent();
-    // Base64 encode the secret key
-    String encodedKey = Utils.base64encodeString(secretKey);
+    final useSecretKey = !path.contains('tokens') && !path.contains('sources');
+    // Base64 encode the key
+    String encodedKey =
+        Utils.base64encodeString(useSecretKey ? secretKey! : publicKey!);
     return {
       'Content-Type': 'application/json',
       'Authorization': 'Basic $encodedKey',
@@ -100,7 +108,7 @@ class OmiseHttpClient {
   ///
   /// Returns an [http.Response] object containing the server's response.
   Future<http.Response> get(String path) async {
-    final headers = await getHeaders();
+    final headers = await getHeaders(path);
     final response = await _httpClient.get(
       Uri.parse('$baseUrl$path'),
       headers: headers,
@@ -116,7 +124,10 @@ class OmiseHttpClient {
   /// The optional [body] parameter can be used to send data in JSON format.
   /// Returns an [http.Response] object containing the server's response.
   Future<http.Response> post(String path, {Map<String, dynamic>? body}) async {
-    final headers = await getHeaders();
+    final headers = await getHeaders(path);
+    if (ignoreNullKeys == true) {
+      body.removeNullValues();
+    }
     final jsonBody = body != null ? jsonEncode(body) : null;
     final response = await _httpClient.post(
       Uri.parse('$baseUrl$path'),
@@ -134,7 +145,10 @@ class OmiseHttpClient {
   /// The optional [body] parameter can be used to send data in JSON format.
   /// Returns an [http.Response] object containing the server's response.
   Future<http.Response> patch(String path, {Map<String, dynamic>? body}) async {
-    final headers = await getHeaders();
+    final headers = await getHeaders(path);
+    if (ignoreNullKeys == true) {
+      body.removeNullValues();
+    }
     final jsonBody = body != null ? jsonEncode(body) : null;
     final response = await _httpClient.patch(
       Uri.parse('$baseUrl$path'),

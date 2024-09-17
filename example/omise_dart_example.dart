@@ -1,10 +1,15 @@
 import 'package:omise_dart/omise_dart.dart';
 
 Future<void> main() async {
-  var omiseHttpClient = OmiseHttpClient(
-      publicKey: "YOUR_PUBLIC_KEY",
-      secretKey: "YOUR_SECRET_KEY",
+  final omiseApi = OmiseApi(
+      publicKey: "pkey_test_5tnt1gxjf6ecypmkfi8",
+      //secretKey: "123",
       enableDebug: true);
-  await omiseHttpClient.post("/charges");
-  return;
+  final token = await omiseApi.tokens.create(CreateTokenRequest(
+      name: "Anas",
+      number: "4242424242424242",
+      expirationMonth: "09",
+      expirationYear: "27"));
+
+  await omiseApi.tokens.get(token.id);
 }
