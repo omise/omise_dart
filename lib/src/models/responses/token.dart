@@ -7,15 +7,15 @@ class Token extends BaseResponse {
   final String createdAt;
 
   Token({
-    required String object,
-    required String id,
-    required bool livemode,
-    String? location,
+    required super.object,
+    required super.id,
+    required super.livemode,
+    super.location,
     required this.used,
     required this.chargeStatus,
     required this.card,
     required this.createdAt,
-  }) : super(object: object, id: id, livemode: livemode, location: location);
+  });
 
   // Factory method to create Token from JSON
   factory Token.fromJson(Map<String, dynamic> json) {
@@ -68,10 +68,10 @@ class Card extends BaseResponse {
   final String createdAt;
 
   Card({
-    required String object,
-    required String id,
-    required bool livemode,
-    String? location,
+    required super.object,
+    required super.id,
+    required super.livemode,
+    super.location,
     required this.deleted,
     this.street1,
     this.street2,
@@ -92,7 +92,7 @@ class Card extends BaseResponse {
     required this.securityCodeCheck,
     this.tokenizationMethod,
     required this.createdAt,
-  }) : super(object: object, id: id, livemode: livemode, location: location);
+  });
 
   // Factory method to create Card from JSON
   factory Card.fromJson(Map<String, dynamic> json) {
@@ -125,6 +125,7 @@ class Card extends BaseResponse {
   }
 
   // Method to convert Card to JSON
+  @override
   Map<String, dynamic> toJson() {
     return {
       'object': object,
