@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:omise_dart/src/enums/environment.dart';
 import 'package:omise_dart/src/enums/omise_api_errors.dart';
 import 'package:omise_dart/src/exceptions/omise_api_exception.dart';
 import 'package:omise_dart/src/models/requests/create_token_request.dart';
@@ -15,10 +14,7 @@ class TokensApi {
   /// The [OmiseHttpClient] is used to make HTTP requests to the Omise API.
   ///
   /// The base URL for the tokens endpoint is set to the vault API URL.
-  TokensApi(this.httpClient) {
-    // The tokens endpoint uses the vault API
-    httpClient.baseUrl = Environment.baseVaultUrl.value;
-  }
+  TokensApi(this.httpClient);
 
   final OmiseHttpClient httpClient;
 

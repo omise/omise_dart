@@ -62,6 +62,13 @@ class OmiseHttpClient {
   /// Wether to send keys with null values in the request body or not
   final bool? ignoreNullKeys;
 
+  String getBaseUrl(String path) {
+    if (path.contains('token')) {
+      return Environment.baseVaultUrl.value;
+    }
+    return Environment.baseUrl.value;
+  }
+
   /// Retrieves a user agent string that includes the Dart SDK version, the SDK package information,
   /// and the operating system details.
   ///
@@ -92,7 +99,9 @@ class OmiseHttpClient {
   /// Returns the HTTP headers required for Omise API requests.
   Future<Map<String, String>> getHeaders(String path) async {
     final userAgent = await getUserAgent();
-    final useSecretKey = !path.contains('tokens') && !path.contains('sources');
+    final useSecretKey = !path.contains('tokens') &&
+        !path.contains('sources') &&
+        !path.contains('capability');
     // Base64 encode the key
     String encodedKey =
         Utils.base64encodeString(useSecretKey ? secretKey! : publicKey!);
@@ -110,7 +119,7 @@ class OmiseHttpClient {
   Future<http.Response> get(String path) async {
     final headers = await getHeaders(path);
     final response = await _httpClient.get(
-      Uri.parse('$baseUrl$path'),
+      Uri.parse('${getBaseUrl(path)}$path'),
       headers: headers,
     );
     if (enableDebug == true) {
@@ -130,7 +139,7 @@ class OmiseHttpClient {
     }
     final jsonBody = body != null ? jsonEncode(body) : null;
     final response = await _httpClient.post(
-      Uri.parse('$baseUrl$path'),
+      Uri.parse('${getBaseUrl(path)}$path'),
       body: jsonBody,
       headers: headers,
     );
@@ -151,7 +160,7 @@ class OmiseHttpClient {
     }
     final jsonBody = body != null ? jsonEncode(body) : null;
     final response = await _httpClient.patch(
-      Uri.parse('$baseUrl$path'),
+      Uri.parse('${getBaseUrl(path)}$path'),
       body: jsonBody,
       headers: headers,
     );

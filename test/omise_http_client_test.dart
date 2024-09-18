@@ -11,7 +11,7 @@ void main() {
   group('OmiseHttpClient Tests', () {
     final baseUrl = Environment.baseUrl.value;
     late MockClient mockClient;
-    late OmiseHttpClient client;
+    late OmiseHttpClient omiseHttpClient;
 
     setUp(() {
       mockClient = MockClient((request) async {
@@ -27,10 +27,11 @@ void main() {
         }
         return http.Response('Not Found', 404);
       });
-      client = OmiseHttpClient(
+      omiseHttpClient = OmiseHttpClient(
         publicKey: 'test_public_key',
         secretKey: 'test_secret_key',
         httpClient: mockClient,
+        enableDebug: true,
       );
     });
 
@@ -60,7 +61,7 @@ void main() {
     });
     test('get sends GET request to the correct URL', () async {
       final getPath = "/getPath";
-      final response = await client.get(getPath);
+      final response = await omiseHttpClient.get(getPath);
       expect(response.statusCode, equals(200));
       expect(response.body, jsonEncode({"key": "value"}));
       expect(response.request!.url.toString(), "$baseUrl$getPath");
@@ -68,7 +69,7 @@ void main() {
 
     test('post sends POST request with correct body', () async {
       final postPath = "/postPath";
-      final response = await client.post(
+      final response = await omiseHttpClient.post(
         postPath,
         body: {'key2': 'value2'},
       );
@@ -79,13 +80,26 @@ void main() {
 
     test('patch sends PATCH request with correct body', () async {
       final patchPath = "/patchPath";
-      final response = await client.patch(
+      final response = await omiseHttpClient.patch(
         patchPath,
         body: {'key3': 'value3'},
       );
       expect(response.statusCode, equals(200));
       expect(response.body, jsonEncode({"key3": "value3"}));
       expect(response.request!.url.toString(), "$baseUrl$patchPath");
+    });
+    group('UserAgent tests', () {
+      test('Check custom user agent', () async {
+        omiseHttpClient = OmiseHttpClient(
+          publicKey: 'test_public_key',
+          secretKey: 'test_secret_key',
+          httpClient: mockClient,
+          enableDebug: true,
+          userAgent: "custom",
+        );
+        await omiseHttpClient.getUserAgent();
+        expect(omiseHttpClient.userAgent, "custom");
+      });
     });
   });
 }

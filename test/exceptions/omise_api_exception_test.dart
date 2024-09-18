@@ -1,6 +1,6 @@
 import 'package:test/test.dart';
 import 'package:omise_dart/src/models/responses/omise_api_error.dart';
-import 'package:omise_dart/src/exceptions/omise_api_exception.dart'; // Adjust the path if needed
+import 'package:omise_dart/src/exceptions/omise_api_exception.dart';
 
 void main() {
   group('OmiseApiException Tests', () {

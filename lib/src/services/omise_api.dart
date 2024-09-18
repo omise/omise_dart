@@ -1,4 +1,5 @@
 import 'package:omise_dart/src/omise_http_client.dart';
+import 'package:omise_dart/src/services/capability_api.dart';
 import 'package:omise_dart/src/services/tokens_api.dart';
 
 /// A main entry point for interacting with the Omise API.
@@ -31,7 +32,7 @@ class OmiseApi {
     String? userAgent,
   }) {
     // Create the HTTP client using the provided parameters
-    final OmiseHttpClient httpClient = OmiseHttpClient(
+    final OmiseHttpClient omiseHttpClient = OmiseHttpClient(
       publicKey: publicKey,
       secretKey: secretKey,
       enableDebug: enableDebug,
@@ -39,10 +40,14 @@ class OmiseApi {
       userAgent: userAgent,
     );
 
-    // Initialize the Token API
-    tokens = TokensApi(httpClient);
+    // Initialize the APIs
+    tokens = TokensApi(omiseHttpClient);
+    capability = CapabilityApi(omiseHttpClient);
   }
 
   /// Provides access to the [TokensApi], which includes methods for creating and retrieving tokens.
   late TokensApi tokens;
+
+  /// Provides access to the [CapabilityApi], which includes methods for retrieving the capabilities of an account.
+  late CapabilityApi capability;
 }

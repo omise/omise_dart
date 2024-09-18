@@ -14,7 +14,7 @@ import '../models/responses/mock_data.dart/tokens_mock.dart';
 void main() {
   group('TokensApi Tests', () {
     late MockClient mockClient;
-    late OmiseHttpClient httpClient;
+    late OmiseHttpClient omiseHttpClient;
     late TokensApi tokensApi;
 
     setUp(() {
@@ -42,12 +42,12 @@ void main() {
         return http.Response('Not Found', 404);
       });
 
-      httpClient = OmiseHttpClient(
+      omiseHttpClient = OmiseHttpClient(
         publicKey: 'test_public_key',
         secretKey: 'test_secret_key',
         httpClient: mockClient,
       );
-      tokensApi = TokensApi(httpClient);
+      tokensApi = TokensApi(omiseHttpClient);
     });
 
     group('create', () {
