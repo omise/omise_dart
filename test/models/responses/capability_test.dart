@@ -10,29 +10,29 @@ void main() {
       final capability = Capability.fromJson(CapabilityMock.getCapability);
 
       expect(capability.object, 'capability');
-      expect(capability.location, '/capability/123');
+      expect(capability.location, '/capability');
       expect(capability.banks, ['bank1', 'bank2']);
       expect(capability.tokenizationMethods, ['method1', 'method2']);
       expect(capability.zeroInterestInstallments, true);
       expect(capability.country, 'TH');
 
       // Test limits
-      expect(capability.limits.chargeAmount.max, 10000);
-      expect(capability.limits.chargeAmount.min, 100);
-      expect(capability.limits.transferAmount.max, 5000);
-      expect(capability.limits.transferAmount.min, 50);
-      expect(capability.limits.installmentAmount.min, 500);
+      expect(capability.limits.chargeAmount.max, 100000);
+      expect(capability.limits.chargeAmount.min, 1000);
+      expect(capability.limits.transferAmount.max, 50000);
+      expect(capability.limits.transferAmount.min, 500);
+      expect(capability.limits.installmentAmount.min, 5000);
 
       // Test payment methods
       expect(capability.paymentMethods.length, 1);
       final paymentMethod = capability.paymentMethods[0];
       expect(paymentMethod.object, 'payment_method');
-      expect(paymentMethod.name, 'card');
+      expect(paymentMethod.name, 'credit_card');
       expect(paymentMethod.currencies, [Currency.THB, Currency.USD]);
       expect(paymentMethod.cardBrands, ['visa', 'mastercard']);
       expect(paymentMethod.installmentTerms, [3, 6]);
-      expect(paymentMethod.banks, ['bank1', 'bank2']);
-      expect(paymentMethod.provider, 'provider1');
+      expect(paymentMethod.banks, ['bank1']);
+      expect(paymentMethod.provider, 'visa');
     });
 
     test('Capability toJson() should serialize correctly', () {
