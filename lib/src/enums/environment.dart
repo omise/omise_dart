@@ -1,5 +1,6 @@
 enum Environment {
-  baseUrl(value: "https://api.omise.co");
+  baseUrl(value: "https://api.omise.co"),
+  baseVaultUrl(value: "https://vault.omise.co");
 
   final String value;
 
