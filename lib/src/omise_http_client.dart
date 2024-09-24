@@ -76,7 +76,7 @@ class OmiseHttpClient {
   /// `dart/<DartSDKVersion> package:<PackageName> sdkVersion:<PackageVersion> (<OperatingSystem> <OSVersion>)`
   ///
   /// For example, it might return:
-  /// `dart/3.5.0 (stable) (Tue Jul 30 02:17:59 2024 -0700) on "macos_arm64" package:omise_dart sdkVersion:1.0.0 (macos Version 14.6.1 (Build 23G93))`
+  /// `dart/3.5.0 (stable) (Tue Jul 30 02:17:59 2024 -0700) on "macos_arm64" omise_dart/1.0.0 (macos Version 14.6.1 (Build 23G93))`
   ///
   /// This function is useful for tracking the environment and SDK version in which your application
   /// is running, often needed for analytics, logging, or debugging.
@@ -93,7 +93,7 @@ class OmiseHttpClient {
     final packageInfo = await Utils.getPackageInfo();
     final sdkVersion = packageInfo['version']!;
     final packageName = packageInfo['name']!;
-    return 'dart/${Platform.version} package:$packageName sdkVersion:$sdkVersion (${Platform.operatingSystem} ${Platform.operatingSystemVersion})';
+    return 'dart/${Platform.version} $packageName/$sdkVersion (${Platform.operatingSystem} ${Platform.operatingSystemVersion})';
   }
 
   /// Returns the HTTP headers required for Omise API requests.
