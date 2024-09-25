@@ -28,7 +28,7 @@ void main() {
       final paymentMethod = capability.paymentMethods[0];
       expect(paymentMethod.object, 'payment_method');
       expect(paymentMethod.name, 'credit_card');
-      expect(paymentMethod.currencies, [Currency.THB, Currency.USD]);
+      expect(paymentMethod.currencies, [Currency.thb, Currency.usd]);
       expect(paymentMethod.cardBrands, ['visa', 'mastercard']);
       expect(paymentMethod.installmentTerms, [3, 6]);
       expect(paymentMethod.banks, ['bank1']);
@@ -49,7 +49,7 @@ void main() {
           PaymentMethod(
             object: 'payment_method',
             name: 'card',
-            currencies: [Currency.THB, Currency.USD],
+            currencies: [Currency.thb, Currency.usd],
             cardBrands: ['visa', 'mastercard'],
             installmentTerms: [3, 6],
             banks: ['bank1', 'bank2'],
