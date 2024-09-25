@@ -96,7 +96,7 @@ We welcome contributions! Please follow these steps to contribute:
 4. Push to the branch: `git push origin my-feature`.
 5. Open a pull request.
 
-For bugs or feature requests, please [create an issue](https://github.com/your-repo/issues).
+For bugs or feature requests, please [create an issue](https://github.com/omise/omise-dart/issues).
 
 ## License
 
