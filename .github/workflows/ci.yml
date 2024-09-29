@@ -6,11 +6,11 @@ jobs:
   build_dart:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Setup Dart
-        uses: dart-lang/setup-dart@v1
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
         with:
-          sdk: "3.5.0"
+          channel: "stable"
+          flutter-version: "3.24.0"
 
       - name: Install dependencies
         run: dart pub get
@@ -20,12 +20,6 @@ jobs:
 
       - name: Run Tests
         run: dart test
-
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          channel: "stable"
-          flutter-version: "3.24.0"
 
       - name: Analyze (Check if distributable for Flutter)
         run: flutter analyze
