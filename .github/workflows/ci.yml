@@ -3,7 +3,7 @@ name: Dart CI
 on: [push, pull_request]
 
 jobs:
-  build_dart:
+  test_and_validate:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the repository
