@@ -23,7 +23,7 @@ class CapabilityMock {
     'zero_interest_installments': true,
     'country': 'TH',
   };
-  static final auth_failed = {
+  static final authFailed = {
     "object": "error",
     "location": "https://www.omise.co/api-errors#authentication-failure",
     "code": "authentication_failure",

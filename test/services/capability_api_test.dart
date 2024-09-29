@@ -54,7 +54,7 @@ void main() {
         // Mock the error response with a 404 status code
         mockClient = MockClient((request) async {
           return http.Response(
-            json.encode(CapabilityMock.auth_failed),
+            json.encode(CapabilityMock.authFailed),
             401,
             headers: {'content-type': 'application/json'},
           );
