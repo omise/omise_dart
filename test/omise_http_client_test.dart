@@ -97,7 +97,7 @@ void main() {
           enableDebug: true,
           userAgent: "custom",
         );
-        await omiseHttpClient.getUserAgent();
+        omiseHttpClient.getUserAgent();
         expect(omiseHttpClient.userAgent, "custom");
       });
     });
