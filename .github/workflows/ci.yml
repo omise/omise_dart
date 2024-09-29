@@ -16,7 +16,10 @@ jobs:
           flutter-version: "3.24.0"
 
       - name: Install dependencies
-        run: dart pub get
+        run: |
+          dart pub get
+          cd example/flutter_example
+          flutter pub get
 
       - name: Analyze (Check if distributable for Dart)
         run: dart analyze
