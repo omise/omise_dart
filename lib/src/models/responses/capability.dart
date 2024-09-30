@@ -168,7 +168,8 @@ class PaymentMethod {
     return {
       'object': object,
       'name': name,
-      'currencies': currencies.map((currency) => currency.name).toList(),
+      'currencies':
+          currencies.map((currency) => currency.name.toUpperCase()).toList(),
       'card_brands': cardBrands,
       'installment_terms': installmentTerms,
       'banks': banks,

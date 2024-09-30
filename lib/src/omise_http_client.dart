@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:omise_dart/src/enums/environment.dart';
 import 'package:omise_dart/src/enums/omise_api_errors.dart';
 import 'package:omise_dart/src/exceptions/omise_api_exception.dart';
+import 'package:omise_dart/src/package_info.dart';
 import 'package:omise_dart/src/utils.dart';
 import 'package:omise_dart/src/extensions/remove_null_map_keys.dart';
 
@@ -82,23 +83,19 @@ class OmiseHttpClient {
   /// is running, often needed for analytics, logging, or debugging.
   ///
   /// Returns:
-  ///   A [Future<String>] containing the user agent string.
-  ///
-  /// Throws:
-  ///   An [Exception] if package information cannot be retrieved.
-  Future<String> getUserAgent() async {
+  ///   A [String] containing the user agent.
+  String getUserAgent() {
     if (userAgent != null) {
       return userAgent!;
     }
-    final packageInfo = await Utils.getPackageInfo();
-    final sdkVersion = packageInfo['version']!;
-    final packageName = packageInfo['name']!;
+    final sdkVersion = PackageInfo.packageVersion;
+    final packageName = PackageInfo.packageName;
     return 'dart/${Platform.version} $packageName/$sdkVersion (${Platform.operatingSystem} ${Platform.operatingSystemVersion})';
   }
 
   /// Returns the HTTP headers required for Omise API requests.
-  Future<Map<String, String>> getHeaders(String path) async {
-    final userAgent = await getUserAgent();
+  Map<String, String> getHeaders(String path) {
+    final userAgent = getUserAgent();
     final useSecretKey = !path.contains('tokens') &&
         !path.contains('sources') &&
         !path.contains('capability');
@@ -117,7 +114,7 @@ class OmiseHttpClient {
   ///
   /// Returns an [http.Response] object containing the server's response.
   Future<http.Response> get(String path) async {
-    final headers = await getHeaders(path);
+    final headers = getHeaders(path);
     final response = await _httpClient.get(
       Uri.parse('${getBaseUrl(path)}$path'),
       headers: headers,
@@ -133,7 +130,7 @@ class OmiseHttpClient {
   /// The optional [body] parameter can be used to send data in JSON format.
   /// Returns an [http.Response] object containing the server's response.
   Future<http.Response> post(String path, {Map<String, dynamic>? body}) async {
-    final headers = await getHeaders(path);
+    final headers = getHeaders(path);
     if (ignoreNullKeys == true) {
       body.removeNullValues();
     }
@@ -154,7 +151,7 @@ class OmiseHttpClient {
   /// The optional [body] parameter can be used to send data in JSON format.
   /// Returns an [http.Response] object containing the server's response.
   Future<http.Response> patch(String path, {Map<String, dynamic>? body}) async {
-    final headers = await getHeaders(path);
+    final headers = getHeaders(path);
     if (ignoreNullKeys == true) {
       body.removeNullValues();
     }

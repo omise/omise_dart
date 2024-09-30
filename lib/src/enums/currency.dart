@@ -1,33 +1,33 @@
 // Enum for Currency
 import 'package:omise_dart/src/exceptions/omise_api_exception.dart';
 
-enum Currency { THB, JPY, USD, EUR, GBP, SGD, AUD, CHF, CNY, DKK, HKD }
+enum Currency { thb, jpy, usd, eur, gbp, sgd, aud, chf, cny, dkk, hkd }
 
 extension CurrencyExtension on Currency {
   static Currency fromString(String value) {
     switch (value.toUpperCase()) {
       case 'THB':
-        return Currency.THB;
+        return Currency.thb;
       case 'JPY':
-        return Currency.JPY;
+        return Currency.jpy;
       case 'USD':
-        return Currency.USD;
+        return Currency.usd;
       case 'EUR':
-        return Currency.EUR;
+        return Currency.eur;
       case 'GBP':
-        return Currency.GBP;
+        return Currency.gbp;
       case 'SGD':
-        return Currency.SGD;
+        return Currency.sgd;
       case 'AUD':
-        return Currency.AUD;
+        return Currency.aud;
       case 'CHF':
-        return Currency.CHF;
+        return Currency.chf;
       case 'CNY':
-        return Currency.CNY;
+        return Currency.cny;
       case 'DKK':
-        return Currency.DKK;
+        return Currency.dkk;
       case 'HKD':
-        return Currency.HKD;
+        return Currency.hkd;
       default:
         throw OmiseApiException(message: 'Unknown currency: $value');
     }
