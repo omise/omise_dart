@@ -1,6 +1,6 @@
-# omise-dart
+# omise_dart
 
-**omise-dart** is a Dart package for integrating Omise's payment API. It provides a simple and intuitive interface to handle transactions, charge creation, and other payment-related activities in Dart and Flutter applications.
+**omise_dart** is a Dart package for integrating Omise's payment API. It provides a simple and intuitive interface to handle transactions, charge creation, and other payment-related activities in Dart and Flutter applications.
 
 ## Features
 
@@ -33,7 +33,7 @@ You will also need an Omise account and your public/private keys, which you can 
 
 ## Usage
 
-Here's a quick example of how to create a token using **omise-dart**:
+Here's a quick example of how to create a token using **omise_dart**:
 
 ```dart
 import 'package:omise_dart/omise_dart.dart';
@@ -96,7 +96,7 @@ We welcome contributions! Please follow these steps to contribute:
 4. Push to the branch: `git push origin my-feature`.
 5. Open a pull request.
 
-For bugs or feature requests, please [create an issue](https://github.com/omise/omise-dart/issues).
+For bugs or feature requests, please [create an issue](https://github.com/omise/omise_dart/issues).
 
 ## License
 
