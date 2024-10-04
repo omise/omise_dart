@@ -3,7 +3,8 @@ import 'package:omise_dart/omise_dart.dart';
 Future<void> main() async {
   // Initialize the Omise API with your public and secret keys
   final omiseApi = OmiseApi(
-    publicKey: "your_public_key_here", // Replace with your actual public key
+    publicKey:
+        "pkey_test_5tnt1gxjf6ecypmkfi8", // Replace with your actual public key
     secretKey: "your_secret_key_here", // Replace with your actual secret key
     enableDebug: true, // Enables debug logging
   );

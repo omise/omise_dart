@@ -1,12 +1,16 @@
+import 'package:omise_dart/src/enums/bank.dart';
+import 'package:omise_dart/src/enums/card_brand.dart';
 import 'package:omise_dart/src/enums/currency.dart';
+import 'package:omise_dart/src/enums/payment_method_name.dart';
+import 'package:omise_dart/src/enums/tokenization_method.dart';
 
 class Capability {
   final String object;
   final String location;
-  final List<String> banks;
+  final List<Bank> banks;
   final Limits limits;
   final List<PaymentMethod> paymentMethods;
-  final List<String> tokenizationMethods;
+  final List<TokenizationMethod> tokenizationMethods;
   final bool zeroInterestInstallments;
   final String country;
 
@@ -25,13 +29,16 @@ class Capability {
     return Capability(
       object: json['object'],
       location: json['location'],
-      banks: List<String>.from(json['banks']),
+      banks: (json['banks'] as List)
+          .map((item) => BankExtension.fromString(item))
+          .toList(),
       limits: Limits.fromJson(json['limits']),
       paymentMethods: (json['payment_methods'] as List)
           .map((item) => PaymentMethod.fromJson(item))
           .toList(),
-      tokenizationMethods:
-          List<String>.from(json['tokenization_methods'] ?? []),
+      tokenizationMethods: (json['tokenization_methods'] as List)
+          .map((item) => TokenizationMethodExtension.fromString(item))
+          .toList(),
       zeroInterestInstallments: json['zero_interest_installments'] ?? false,
       country: json['country'],
     );
@@ -41,10 +48,11 @@ class Capability {
     return {
       'object': object,
       'location': location,
-      'banks': banks,
+      'banks': banks.map((bank) => bank.name).toList(),
       'limits': limits.toJson(),
       'payment_methods': paymentMethods.map((pm) => pm.toJson()).toList(),
-      'tokenization_methods': tokenizationMethods,
+      'tokenization_methods':
+          tokenizationMethods.map((method) => method.name).toList(),
       'zero_interest_installments': zeroInterestInstallments,
       'country': country,
     };
@@ -129,11 +137,11 @@ class InstallmentAmount {
 // PaymentMethod model
 class PaymentMethod {
   final String object;
-  final String name;
+  final PaymentMethodName name;
   final List<Currency> currencies;
-  final List<String>? cardBrands;
+  final List<CardBrand>? cardBrands;
   final List<int>? installmentTerms;
-  final List<String> banks;
+  final List<Bank> banks;
   final String? provider;
 
   PaymentMethod({
@@ -149,17 +157,21 @@ class PaymentMethod {
   factory PaymentMethod.fromJson(Map<String, dynamic> json) {
     return PaymentMethod(
       object: json['object'],
-      name: json['name'],
+      name: PaymentMethodNameExtension.fromString(json['name']),
       currencies: (json['currencies'] as List)
           .map((item) => CurrencyExtension.fromString(item))
           .toList(),
       cardBrands: json['card_brands'] != null
-          ? List<String>.from(json['card_brands'])
+          ? (json['card_brands'] as List)
+              .map((item) => CardBrand.fromString(item))
+              .toList()
           : null,
       installmentTerms: json['installment_terms'] != null
           ? List<int>.from(json['installment_terms'])
           : null,
-      banks: List<String>.from(json['banks']),
+      banks: (json['banks'] as List)
+          .map((item) => BankExtension.fromString(item))
+          .toList(),
       provider: json['provider'],
     );
   }
@@ -167,12 +179,12 @@ class PaymentMethod {
   Map<String, dynamic> toJson() {
     return {
       'object': object,
-      'name': name,
+      'name': name.name,
       'currencies':
           currencies.map((currency) => currency.name.toUpperCase()).toList(),
-      'card_brands': cardBrands,
+      'card_brands': cardBrands?.map((cardBrand) => cardBrand.value).toList(),
       'installment_terms': installmentTerms,
-      'banks': banks,
+      'banks': banks.map((bank) => bank.name).toList(),
       'provider': provider,
     };
   }

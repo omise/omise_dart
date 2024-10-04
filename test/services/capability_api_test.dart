@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:http/testing.dart';
+import 'package:omise_dart/omise_dart.dart';
 import 'package:omise_dart/src/exceptions/omise_api_exception.dart';
-import 'package:omise_dart/src/models/responses/capability.dart';
 import 'package:omise_dart/src/omise_http_client.dart';
 import 'package:omise_dart/src/services/capability_api.dart';
 import 'package:test/test.dart';
@@ -43,11 +43,12 @@ void main() {
         expect(result, isA<Capability>());
         expect(result.object, 'capability');
         expect(result.location, '/capability');
-        expect(result.banks, ['bank1', 'bank2']);
+        expect(result.banks, [Bank.bbl, Bank.kbank]);
         expect(result.zeroInterestInstallments, true);
         expect(result.limits.chargeAmount.max, 100000);
-        expect(result.paymentMethods.first.name, 'credit_card');
-        expect(result.paymentMethods.first.cardBrands, ['visa', 'mastercard']);
+        expect(result.paymentMethods.first.name, PaymentMethodName.card);
+        expect(result.paymentMethods.first.cardBrands,
+            [CardBrand.visa, CardBrand.masterCard]);
       });
 
       test('should throw OmiseApiException on failure (404)', () async {
