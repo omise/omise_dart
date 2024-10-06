@@ -86,13 +86,10 @@ void main() {
     });
 
     test(
-        'fromString() should throw ArgumentError for unknown payment method names',
+        'fromString() should return unknown enum for unknown payment method names',
         () {
-      expect(
-        () => PaymentMethodNameExtension.fromString('unknown_method'),
-        throwsA(isA<ArgumentError>().having((e) => e.message, 'message',
-            'Unknown payment method name: unknown_method')),
-      );
+      expect(PaymentMethodNameExtension.fromString('unknown_method'),
+          equals(PaymentMethodName.unknown));
     });
 
     test('fromString() should be case-insensitive', () {
@@ -100,7 +97,7 @@ void main() {
           equals(PaymentMethodName.card));
       expect(PaymentMethodNameExtension.fromString('alipayplus_upm'),
           equals(PaymentMethodName.alipayPlusUpm));
-      expect(PaymentMethodNameExtension.fromString('mobile_banking_bbl'),
+      expect(PaymentMethodNameExtension.fromString('mobile_banking_BBl'),
           equals(PaymentMethodName.mobileBankingBbl));
     });
   });

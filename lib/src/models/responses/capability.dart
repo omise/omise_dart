@@ -48,7 +48,7 @@ class Capability {
     return {
       'object': object,
       'location': location,
-      'banks': banks.map((bank) => bank.name).toList(),
+      'banks': banks.map((bank) => bank.value).toList(),
       'limits': limits.toJson(),
       'payment_methods': paymentMethods.map((pm) => pm.toJson()).toList(),
       'tokenization_methods':
@@ -179,12 +179,11 @@ class PaymentMethod {
   Map<String, dynamic> toJson() {
     return {
       'object': object,
-      'name': name.name,
-      'currencies':
-          currencies.map((currency) => currency.name.toUpperCase()).toList(),
+      'name': name.value,
+      'currencies': currencies.map((currency) => currency.value).toList(),
       'card_brands': cardBrands?.map((cardBrand) => cardBrand.value).toList(),
       'installment_terms': installmentTerms,
-      'banks': banks.map((bank) => bank.name).toList(),
+      'banks': banks.map((bank) => bank.value).toList(),
       'provider': provider,
     };
   }

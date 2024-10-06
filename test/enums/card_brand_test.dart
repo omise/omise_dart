@@ -17,12 +17,8 @@ void main() {
       expect(CardBrand.fromString('Visa'), equals(CardBrand.visa));
     });
 
-    test('fromString() should throw ArgumentError for unknown card brand', () {
-      expect(
-        () => CardBrand.fromString('InvalidCard'),
-        throwsA(isA<ArgumentError>().having(
-            (e) => e.message, 'message', 'Invalid card brand: InvalidCard')),
-      );
+    test('fromString() should return unknown for unknown card brand', () {
+      expect(CardBrand.fromString('unknown'), equals(CardBrand.unknown));
     });
 
     test('fromString() should be case-insensitive', () {

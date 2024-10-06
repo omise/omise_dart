@@ -38,12 +38,8 @@ void main() {
       expect(BankExtension.fromString('lhb'), equals(Bank.lhb));
     });
 
-    test('fromString() should throw ArgumentError for unknown bank', () {
-      expect(
-        () => BankExtension.fromString('unknown_bank'),
-        throwsA(isA<ArgumentError>()
-            .having((e) => e.message, 'message', 'Unknown bank: unknown_bank')),
-      );
+    test('fromString() should return unknown for unknown bank', () {
+      expect(BankExtension.fromString('unknown_bank'), equals(Bank.unknown));
     });
 
     test('fromString() should be case-insensitive', () {

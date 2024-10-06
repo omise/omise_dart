@@ -1,218 +1,90 @@
 enum PaymentMethodName {
-  card,
-  internetBankingBay,
-  internetBankingBbl,
-  alipay,
-  alipayPlusMpm,
-  alipayPlusUpm,
-  installmentBay,
-  installmentBbl,
-  installmentFirstChoice,
-  installmentKbank,
-  installmentKtc,
-  installmentPaynextExtraJumpapp,
-  installmentPaynextExtraQr,
-  installmentScb,
-  installmentUob,
-  installmentTtb,
-  installmentWlbBay,
-  installmentWlbBbl,
-  installmentWlbFirstChoice,
-  installmentWlbKbank,
-  installmentWlbKtc,
-  installmentWlbScb,
-  installmentWlbTtb,
-  installmentWlbUob,
-  mobileBankingScb,
-  mobileBankingKbank,
-  mobileBankingBbl,
-  mobileBankingBay,
-  mobileBankingKtb,
-  mobileBankingOcbc,
-  mobileBankingOcbcPao,
-  barcodeAlipay,
-  billPaymentTescoLotus,
-  econtext,
-  virtualAccount,
-  truemoney,
-  truemoneyJumpapp,
-  truemoneyQr,
-  promptpay,
-  pointsCiti,
-  paynow,
-  qrCodeUpi,
-  fpx,
-  alipayCn,
-  alipayHk,
-  bkash,
-  dana,
-  gcash,
-  easypaisa,
-  kakaopay,
-  touchNGo,
-  rabbitLinepay,
-  grabpay,
-  boost,
-  shopeePay,
-  shopeePayJumpapp,
-  paypay,
-  installmentMbb,
-  atome,
-  atomeQr,
-  wechatPay,
-  wechatPayMpm,
-  wechatPayUpm,
-  directDebitBay,
-  directDebitKbank,
-  directDebitKtb,
-  directDebitScb,
-  duitnowObw,
-  duitnowQr,
+  card('card'),
+  internetBankingBay('internet_banking_bay'),
+  internetBankingBbl('internet_banking_bbl'),
+  alipay('alipay'),
+  alipayPlusMpm('alipayplus_mpm'),
+  alipayPlusUpm('alipayplus_upm'),
+  installmentBay('installment_bay'),
+  installmentBbl('installment_bbl'),
+  installmentFirstChoice('installment_first_choice'),
+  installmentKbank('installment_kbank'),
+  installmentKtc('installment_ktc'),
+  installmentPaynextExtraJumpapp('installment_paynext_extra_jumpapp'),
+  installmentPaynextExtraQr('installment_paynext_extra_qr'),
+  installmentScb('installment_scb'),
+  installmentUob('installment_uob'),
+  installmentTtb('installment_ttb'),
+  installmentWlbBay('installment_wlb_bay'),
+  installmentWlbBbl('installment_wlb_bbl'),
+  installmentWlbFirstChoice('installment_wlb_first_choice'),
+  installmentWlbKbank('installment_wlb_kbank'),
+  installmentWlbKtc('installment_wlb_ktc'),
+  installmentWlbScb('installment_wlb_scb'),
+  installmentWlbTtb('installment_wlb_ttb'),
+  installmentWlbUob('installment_wlb_uob'),
+  mobileBankingScb('mobile_banking_scb'),
+  mobileBankingKbank('mobile_banking_kbank'),
+  mobileBankingBbl('mobile_banking_bbl'),
+  mobileBankingBay('mobile_banking_bay'),
+  mobileBankingKtb('mobile_banking_ktb'),
+  mobileBankingOcbc('mobile_banking_ocbc'),
+  mobileBankingOcbcPao('mobile_banking_ocbc_pao'),
+  barcodeAlipay('barcode_alipay'),
+  billPaymentTescoLotus('bill_payment_tesco_lotus'),
+  econtext('econtext'),
+  virtualAccount('virtual_account'),
+  truemoney('truemoney'),
+  truemoneyJumpapp('truemoney_jumpapp'),
+  truemoneyQr('truemoney_qr'),
+  promptpay('promptpay'),
+  pointsCiti('points_citi'),
+  paynow('paynow'),
+  qrCodeUpi('qr_code_upi'),
+  fpx('fpx'),
+  alipayCn('alipay_cn'),
+  alipayHk('alipay_hk'),
+  bkash('bkash'),
+  dana('dana'),
+  gcash('gcash'),
+  easypaisa('easypaisa'),
+  kakaopay('kakaopay'),
+  touchNGo('touch_n_go'),
+  rabbitLinepay('rabbit_linepay'),
+  grabpay('grabpay'),
+  boost('boost'),
+  shopeePay('shopeepay'),
+  shopeePayJumpapp('shopeepay_jumpapp'),
+  paypay('paypay'),
+  installmentMbb('installment_mbb'),
+  atome('atome'),
+  atomeQr('atome_qr'),
+  wechatPay('wechat_pay'),
+  wechatPayMpm('wechat_pay_mpm'),
+  wechatPayUpm('wechat_pay_upm'),
+  directDebitBay('direct_debit_bay'),
+  directDebitKbank('direct_debit_kbank'),
+  directDebitKtb('direct_debit_ktb'),
+  directDebitScb('direct_debit_scb'),
+  duitnowObw('duitnow_obw'),
+  duitnowQr('duitnow_qr'),
+
+  /// Represents an unknown payment method.
+  /// This value is used as a fallback when a payment method is received from the backend
+  /// that does not match any of the defined enums. This helps to prevent crashes
+  /// due to unrecognized payment methods and allows for graceful handling of such cases.
+  unknown('unknown');
+
+  final String value;
+
+  const PaymentMethodName(this.value);
 }
 
 extension PaymentMethodNameExtension on PaymentMethodName {
-  static PaymentMethodName fromString(String value) {
-    switch (value) {
-      case 'card':
-        return PaymentMethodName.card;
-      case 'internet_banking_bay':
-        return PaymentMethodName.internetBankingBay;
-      case 'internet_banking_bbl':
-        return PaymentMethodName.internetBankingBbl;
-      case 'alipay':
-        return PaymentMethodName.alipay;
-      case 'alipayplus_mpm':
-        return PaymentMethodName.alipayPlusMpm;
-      case 'alipayplus_upm':
-        return PaymentMethodName.alipayPlusUpm;
-      case 'installment_bay':
-        return PaymentMethodName.installmentBay;
-      case 'installment_bbl':
-        return PaymentMethodName.installmentBbl;
-      case 'installment_first_choice':
-        return PaymentMethodName.installmentFirstChoice;
-      case 'installment_kbank':
-        return PaymentMethodName.installmentKbank;
-      case 'installment_ktc':
-        return PaymentMethodName.installmentKtc;
-      case 'installment_paynext_extra_jumpapp':
-        return PaymentMethodName.installmentPaynextExtraJumpapp;
-      case 'installment_paynext_extra_qr':
-        return PaymentMethodName.installmentPaynextExtraQr;
-      case 'installment_scb':
-        return PaymentMethodName.installmentScb;
-      case 'installment_uob':
-        return PaymentMethodName.installmentUob;
-      case 'installment_ttb':
-        return PaymentMethodName.installmentTtb;
-      case 'installment_wlb_bay':
-        return PaymentMethodName.installmentWlbBay;
-      case 'installment_wlb_bbl':
-        return PaymentMethodName.installmentWlbBbl;
-      case 'installment_wlb_first_choice':
-        return PaymentMethodName.installmentWlbFirstChoice;
-      case 'installment_wlb_kbank':
-        return PaymentMethodName.installmentWlbKbank;
-      case 'installment_wlb_ktc':
-        return PaymentMethodName.installmentWlbKtc;
-      case 'installment_wlb_scb':
-        return PaymentMethodName.installmentWlbScb;
-      case 'installment_wlb_ttb':
-        return PaymentMethodName.installmentWlbTtb;
-      case 'installment_wlb_uob':
-        return PaymentMethodName.installmentWlbUob;
-      case 'mobile_banking_scb':
-        return PaymentMethodName.mobileBankingScb;
-      case 'mobile_banking_kbank':
-        return PaymentMethodName.mobileBankingKbank;
-      case 'mobile_banking_bbl':
-        return PaymentMethodName.mobileBankingBbl;
-      case 'mobile_banking_bay':
-        return PaymentMethodName.mobileBankingBay;
-      case 'mobile_banking_ktb':
-        return PaymentMethodName.mobileBankingKtb;
-      case 'mobile_banking_ocbc':
-        return PaymentMethodName.mobileBankingOcbc;
-      case 'mobile_banking_ocbc_pao':
-        return PaymentMethodName.mobileBankingOcbcPao;
-      case 'barcode_alipay':
-        return PaymentMethodName.barcodeAlipay;
-      case 'bill_payment_tesco_lotus':
-        return PaymentMethodName.billPaymentTescoLotus;
-      case 'econtext':
-        return PaymentMethodName.econtext;
-      case 'virtual_account':
-        return PaymentMethodName.virtualAccount;
-      case 'truemoney':
-        return PaymentMethodName.truemoney;
-      case 'truemoney_jumpapp':
-        return PaymentMethodName.truemoneyJumpapp;
-      case 'truemoney_qr':
-        return PaymentMethodName.truemoneyQr;
-      case 'promptpay':
-        return PaymentMethodName.promptpay;
-      case 'points_citi':
-        return PaymentMethodName.pointsCiti;
-      case 'paynow':
-        return PaymentMethodName.paynow;
-      case 'qr_code_upi':
-        return PaymentMethodName.qrCodeUpi;
-      case 'fpx':
-        return PaymentMethodName.fpx;
-      case 'alipay_cn':
-        return PaymentMethodName.alipayCn;
-      case 'alipay_hk':
-        return PaymentMethodName.alipayHk;
-      case 'bkash':
-        return PaymentMethodName.bkash;
-      case 'dana':
-        return PaymentMethodName.dana;
-      case 'gcash':
-        return PaymentMethodName.gcash;
-      case 'easypaisa':
-        return PaymentMethodName.easypaisa;
-      case 'kakaopay':
-        return PaymentMethodName.kakaopay;
-      case 'touch_n_go':
-        return PaymentMethodName.touchNGo;
-      case 'rabbit_linepay':
-        return PaymentMethodName.rabbitLinepay;
-      case 'grabpay':
-        return PaymentMethodName.grabpay;
-      case 'boost':
-        return PaymentMethodName.boost;
-      case 'shopeepay':
-        return PaymentMethodName.shopeePay;
-      case 'shopeepay_jumpapp':
-        return PaymentMethodName.shopeePayJumpapp;
-      case 'paypay':
-        return PaymentMethodName.paypay;
-      case 'installment_mbb':
-        return PaymentMethodName.installmentMbb;
-      case 'atome':
-        return PaymentMethodName.atome;
-      case 'atome_qr':
-        return PaymentMethodName.atomeQr;
-      case 'wechat_pay':
-        return PaymentMethodName.wechatPay;
-      case 'wechat_pay_mpm':
-        return PaymentMethodName.wechatPayMpm;
-      case 'wechat_pay_upm':
-        return PaymentMethodName.wechatPayUpm;
-      case 'direct_debit_bay':
-        return PaymentMethodName.directDebitBay;
-      case 'direct_debit_kbank':
-        return PaymentMethodName.directDebitKbank;
-      case 'direct_debit_ktb':
-        return PaymentMethodName.directDebitKtb;
-      case 'direct_debit_scb':
-        return PaymentMethodName.directDebitScb;
-      case 'duitnow_obw':
-        return PaymentMethodName.duitnowObw;
-      case 'duitnow_qr':
-        return PaymentMethodName.duitnowQr;
-      default:
-        throw ArgumentError('Unknown payment method name: $value');
-    }
+  static PaymentMethodName fromString(String methodName) {
+    return PaymentMethodName.values.firstWhere(
+      (method) => method.value.toLowerCase() == methodName.toLowerCase(),
+      orElse: () => PaymentMethodName.unknown,
+    );
   }
 }
