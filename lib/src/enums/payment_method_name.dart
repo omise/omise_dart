@@ -30,7 +30,6 @@ enum PaymentMethodName {
   mobileBankingKtb,
   mobileBankingOcbc,
   mobileBankingOcbcPao,
-  creditCard,
   barcodeAlipay,
   billPaymentTescoLotus,
   econtext,
@@ -67,6 +66,8 @@ enum PaymentMethodName {
   directDebitKbank,
   directDebitKtb,
   directDebitScb,
+  duitnowObw,
+  duitnowQr,
 }
 
 extension PaymentMethodNameExtension on PaymentMethodName {
@@ -134,8 +135,6 @@ extension PaymentMethodNameExtension on PaymentMethodName {
         return PaymentMethodName.mobileBankingOcbc;
       case 'mobile_banking_ocbc_pao':
         return PaymentMethodName.mobileBankingOcbcPao;
-      case 'credit_card':
-        return PaymentMethodName.creditCard;
       case 'barcode_alipay':
         return PaymentMethodName.barcodeAlipay;
       case 'bill_payment_tesco_lotus':
@@ -208,6 +207,10 @@ extension PaymentMethodNameExtension on PaymentMethodName {
         return PaymentMethodName.directDebitKtb;
       case 'direct_debit_scb':
         return PaymentMethodName.directDebitScb;
+      case 'duitnow_obw':
+        return PaymentMethodName.duitnowObw;
+      case 'duitnow_qr':
+        return PaymentMethodName.duitnowQr;
       default:
         throw ArgumentError('Unknown payment method name: $value');
     }
