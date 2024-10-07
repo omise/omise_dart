@@ -1,35 +1,30 @@
 // Enum for Currency
-import 'package:omise_dart/src/exceptions/omise_api_exception.dart';
+enum Currency {
+  thb('THB'),
+  jpy('JPY'),
+  usd('USD'),
+  eur('EUR'),
+  gbp('GBP'),
+  sgd('SGD'),
+  aud('AUD'),
+  chf('CHF'),
+  cny('CNY'),
+  dkk('DKK'),
+  hkd('HKD'),
 
-enum Currency { thb, jpy, usd, eur, gbp, sgd, aud, chf, cny, dkk, hkd }
+  /// Represents an unknown currency, used to handle cases where the currency is not recognized.
+  unknown('unknown');
+
+  final String value;
+
+  const Currency(this.value);
+}
 
 extension CurrencyExtension on Currency {
   static Currency fromString(String value) {
-    switch (value.toUpperCase()) {
-      case 'THB':
-        return Currency.thb;
-      case 'JPY':
-        return Currency.jpy;
-      case 'USD':
-        return Currency.usd;
-      case 'EUR':
-        return Currency.eur;
-      case 'GBP':
-        return Currency.gbp;
-      case 'SGD':
-        return Currency.sgd;
-      case 'AUD':
-        return Currency.aud;
-      case 'CHF':
-        return Currency.chf;
-      case 'CNY':
-        return Currency.cny;
-      case 'DKK':
-        return Currency.dkk;
-      case 'HKD':
-        return Currency.hkd;
-      default:
-        throw OmiseApiException(message: 'Unknown currency: $value');
-    }
+    return Currency.values.firstWhere(
+      (currency) => currency.value.toLowerCase() == value.toLowerCase(),
+      orElse: () => Currency.unknown,
+    );
   }
 }

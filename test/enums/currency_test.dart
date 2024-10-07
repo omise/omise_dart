@@ -1,5 +1,4 @@
 import 'package:test/test.dart';
-import 'package:omise_dart/src/exceptions/omise_api_exception.dart';
 import 'package:omise_dart/src/enums/currency.dart';
 
 void main() {
@@ -20,17 +19,13 @@ void main() {
       expect(CurrencyExtension.fromString('HKD'), equals(Currency.hkd));
     });
 
-    test('fromString() should throw OmiseApiException for unknown currency',
-        () {
-      expect(
-          () => CurrencyExtension.fromString('XYZ'),
-          throwsA(isA<OmiseApiException>()
-              .having((e) => e.message, 'message', 'Unknown currency: XYZ')));
+    test('fromString() should return unknown for unknown currency', () {
+      expect(CurrencyExtension.fromString('XYZ'), equals(Currency.unknown));
     });
 
     test('fromString() should be case-insensitive', () {
-      expect(CurrencyExtension.fromString('thb'), equals(Currency.thb));
-      expect(CurrencyExtension.fromString('jpy'), equals(Currency.jpy));
+      expect(CurrencyExtension.fromString('tHb'), equals(Currency.thb));
+      expect(CurrencyExtension.fromString('jpY'), equals(Currency.jpy));
       expect(CurrencyExtension.fromString('usd'), equals(Currency.usd));
     });
   });

@@ -1,3 +1,7 @@
+import 'package:omise_dart/src/enums/bank.dart';
+import 'package:omise_dart/src/enums/card_brand.dart';
+import 'package:omise_dart/src/enums/payment_method_name.dart';
+import 'package:omise_dart/src/enums/tokenization_method.dart';
 import 'package:omise_dart/src/models/responses/capability.dart';
 import 'package:test/test.dart';
 import 'package:omise_dart/src/enums/currency.dart';
@@ -11,8 +15,9 @@ void main() {
 
       expect(capability.object, 'capability');
       expect(capability.location, '/capability');
-      expect(capability.banks, ['bank1', 'bank2']);
-      expect(capability.tokenizationMethods, ['method1', 'method2']);
+      expect(capability.banks, [Bank.bbl, Bank.kbank]);
+      expect(capability.tokenizationMethods,
+          [TokenizationMethod.googlepay, TokenizationMethod.applepay]);
       expect(capability.zeroInterestInstallments, true);
       expect(capability.country, 'TH');
 
@@ -27,11 +32,11 @@ void main() {
       expect(capability.paymentMethods.length, 1);
       final paymentMethod = capability.paymentMethods[0];
       expect(paymentMethod.object, 'payment_method');
-      expect(paymentMethod.name, 'credit_card');
+      expect(paymentMethod.name, PaymentMethodName.card);
       expect(paymentMethod.currencies, [Currency.thb, Currency.usd]);
-      expect(paymentMethod.cardBrands, ['visa', 'mastercard']);
+      expect(paymentMethod.cardBrands, [CardBrand.visa, CardBrand.masterCard]);
       expect(paymentMethod.installmentTerms, [3, 6]);
-      expect(paymentMethod.banks, ['bank1']);
+      expect(paymentMethod.banks, [Bank.bbl]);
       expect(paymentMethod.provider, 'visa');
     });
 
@@ -39,7 +44,7 @@ void main() {
       final capability = Capability(
         object: 'capability',
         location: '/capability/123',
-        banks: ['bank1', 'bank2'],
+        banks: [Bank.bbl, Bank.kbank],
         limits: Limits(
           chargeAmount: Amount(max: 10000, min: 100),
           transferAmount: Amount(max: 5000, min: 50),
@@ -48,15 +53,18 @@ void main() {
         paymentMethods: [
           PaymentMethod(
             object: 'payment_method',
-            name: 'card',
+            name: PaymentMethodName.card,
             currencies: [Currency.thb, Currency.usd],
-            cardBrands: ['visa', 'mastercard'],
+            cardBrands: [CardBrand.visa, CardBrand.masterCard],
             installmentTerms: [3, 6],
-            banks: ['bank1', 'bank2'],
-            provider: 'provider1',
+            banks: [Bank.bbl],
+            provider: 'visa',
           )
         ],
-        tokenizationMethods: ['method1', 'method2'],
+        tokenizationMethods: [
+          TokenizationMethod.googlepay,
+          TokenizationMethod.applepay
+        ],
         zeroInterestInstallments: true,
         country: 'TH',
       );
@@ -65,8 +73,8 @@ void main() {
 
       expect(json['object'], 'capability');
       expect(json['location'], '/capability/123');
-      expect(json['banks'], ['bank1', 'bank2']);
-      expect(json['tokenization_methods'], ['method1', 'method2']);
+      expect(json['banks'], ['bbl', 'kbank']);
+      expect(json['tokenization_methods'], ['googlepay', 'applepay']);
       expect(json['zero_interest_installments'], true);
       expect(json['country'], 'TH');
 
@@ -83,10 +91,10 @@ void main() {
       expect(paymentMethodJson['object'], 'payment_method');
       expect(paymentMethodJson['name'], 'card');
       expect(paymentMethodJson['currencies'], ['THB', 'USD']);
-      expect(paymentMethodJson['card_brands'], ['visa', 'mastercard']);
+      expect(paymentMethodJson['card_brands'], ['Visa', 'MasterCard']);
       expect(paymentMethodJson['installment_terms'], [3, 6]);
-      expect(paymentMethodJson['banks'], ['bank1', 'bank2']);
-      expect(paymentMethodJson['provider'], 'provider1');
+      expect(paymentMethodJson['banks'], ['bbl']);
+      expect(paymentMethodJson['provider'], 'visa');
     });
 
     test('Limits fromJson() should parse correctly', () {
