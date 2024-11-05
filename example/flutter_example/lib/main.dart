@@ -78,7 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: () async {
           setLoading(true);
           try {
-            final token = await omiseApi.tokens.create(const CreateTokenRequest(
+            final token = await omiseApi.tokens.create(CreateTokenRequest(
               name: "Name",
               number: "4242424242424242", // Example test card number
               expirationMonth: "09", // Card expiry month

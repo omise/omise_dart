@@ -1,10 +1,12 @@
+import 'package:omise_dart/src/enums/charge_status.dart';
+import 'package:omise_dart/src/extensions/date_time_no_milliseconds.dart';
 import 'package:omise_dart/src/models/responses/base_response.dart';
 
 class Token extends BaseResponse {
   final bool used;
-  final String chargeStatus;
+  final ChargeStatus chargeStatus;
   final Card card;
-  final String createdAt;
+  final DateTime createdAt;
 
   Token({
     required super.object,
@@ -25,9 +27,9 @@ class Token extends BaseResponse {
       livemode: json['livemode'],
       location: json['location'],
       used: json['used'],
-      chargeStatus: json['charge_status'],
+      chargeStatus: ChargeStatusExtension.fromString(json['charge_status']),
       card: Card.fromJson(json['card']),
-      createdAt: json['created_at'],
+      createdAt: DateTime.parse(json['created_at']),
     );
   }
 
@@ -37,9 +39,9 @@ class Token extends BaseResponse {
     final baseJson = super.toJson();
     baseJson.addAll({
       'used': used,
-      'charge_status': chargeStatus,
+      'charge_status': chargeStatus.name,
       'card': card.toJson(),
-      'created_at': createdAt,
+      'created_at': createdAt.toIso8601StringWithoutMilliseconds(),
     });
     return baseJson;
   }
