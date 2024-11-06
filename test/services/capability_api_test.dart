@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:http/testing.dart';
 import 'package:omise_dart/omise_dart.dart';
-import 'package:omise_dart/src/exceptions/omise_api_exception.dart';
 import 'package:omise_dart/src/omise_http_client.dart';
 import 'package:omise_dart/src/services/capability_api.dart';
 import 'package:test/test.dart';
