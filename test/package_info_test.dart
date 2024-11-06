@@ -8,7 +8,7 @@ void main() {
     });
 
     test('should return correct package version', () {
-      expect(PackageInfo.packageVersion, '0.1.0');
+      expect(PackageInfo.packageVersion, '0.2.0');
     });
   });
 }
