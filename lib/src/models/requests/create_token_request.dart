@@ -1,19 +1,19 @@
 class CreateTokenRequest {
-  final String name;
-  final String number;
-  final String expirationMonth;
-  final String expirationYear;
-  final String? securityCode;
-  final String? city;
-  final String? country;
-  final String? postalCode;
-  final String? phoneNumber;
-  final String? email;
-  final String? state;
-  final String? street1;
-  final String? street2;
+  String name;
+  String number;
+  String expirationMonth;
+  String expirationYear;
+  String? securityCode;
+  String? city;
+  String? country;
+  String? postalCode;
+  String? phoneNumber;
+  String? email;
+  String? state;
+  String? street1;
+  String? street2;
 
-  const CreateTokenRequest({
+  CreateTokenRequest({
     required this.name,
     required this.number,
     required this.expirationMonth,

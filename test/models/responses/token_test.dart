@@ -1,3 +1,4 @@
+import 'package:omise_dart/src/enums/charge_status.dart';
 import 'package:omise_dart/src/models/responses/token.dart';
 import 'package:test/test.dart';
 
@@ -24,9 +25,9 @@ void main() {
         id: 'tok_123',
         livemode: true,
         used: false,
-        chargeStatus: 'pending',
+        chargeStatus: ChargeStatus.pending,
         card: card,
-        createdAt: '2024-09-15T00:00:00Z',
+        createdAt: DateTime.parse('2024-09-15T00:00:00Z'),
       );
 
       final json = token.toJson();
@@ -70,9 +71,9 @@ void main() {
       expect(token.id, 'tok_123');
       expect(token.livemode, true);
       expect(token.used, false);
-      expect(token.chargeStatus, 'pending');
+      expect(token.chargeStatus, ChargeStatus.pending);
       expect(token.card.id, 'card_123');
-      expect(token.createdAt, '2024-09-15T00:00:00Z');
+      expect(token.createdAt, DateTime.parse('2024-09-15T00:00:00Z'));
     });
 
     test('toJson and fromJson should work together', () {
@@ -96,9 +97,9 @@ void main() {
         id: 'tok_123',
         livemode: true,
         used: false,
-        chargeStatus: 'pending',
+        chargeStatus: ChargeStatus.pending,
         card: card,
-        createdAt: '2024-09-15T00:00:00Z',
+        createdAt: DateTime.parse('2024-09-15T00:00:00Z'),
       );
 
       final json = token.toJson();

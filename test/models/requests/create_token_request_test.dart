@@ -4,7 +4,7 @@ import 'package:omise_dart/src/models/requests/create_token_request.dart';
 void main() {
   group('CreateTokenRequest', () {
     test('toJson should convert CreateTokenRequest to correct map', () {
-      const request = CreateTokenRequest(
+      final request = CreateTokenRequest(
         name: 'John Doe',
         number: '4242424242424242',
         expirationMonth: '12',
@@ -72,7 +72,7 @@ void main() {
     });
 
     test('toJson and fromJson should work together', () {
-      const request = CreateTokenRequest(
+      final request = CreateTokenRequest(
         name: 'John Doe',
         number: '4242424242424242',
         expirationMonth: '12',
