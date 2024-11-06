@@ -1,8 +1,13 @@
-## 0.2.0 [BREAKING]
+## 0.2.0
 
-- Update models to use DateTime type and ChargeStatus enum for Token response.
-- Expose enum and exception classes to external usage.
-- Make the create token request class mutable for easier frontend manipulation.
+### Breaking Changes
+
+- Updated models to use `DateTime` type and `ChargeStatus` enum for `Token` response.
+- Made `CreateTokenRequest` class mutable for easier frontend manipulation.
+
+### Enhancements
+
+- Expose enum and exception classes for external usage.
 
 ## 0.1.0
 
