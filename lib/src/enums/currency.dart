@@ -21,9 +21,9 @@ enum Currency {
 }
 
 extension CurrencyExtension on Currency {
-  static Currency fromString(String value) {
+  static Currency fromString(String? value) {
     return Currency.values.firstWhere(
-      (currency) => currency.value.toLowerCase() == value.toLowerCase(),
+      (currency) => currency.value.toLowerCase() == value?.toLowerCase(),
       orElse: () => Currency.unknown,
     );
   }

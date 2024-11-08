@@ -81,9 +81,9 @@ enum PaymentMethodName {
 }
 
 extension PaymentMethodNameExtension on PaymentMethodName {
-  static PaymentMethodName fromString(String methodName) {
+  static PaymentMethodName fromString(String? methodName) {
     return PaymentMethodName.values.firstWhere(
-      (method) => method.value.toLowerCase() == methodName.toLowerCase(),
+      (method) => method.value.toLowerCase() == methodName?.toLowerCase(),
       orElse: () => PaymentMethodName.unknown,
     );
   }

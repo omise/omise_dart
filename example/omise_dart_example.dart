@@ -5,7 +5,7 @@ Future<void> main() async {
   final omiseApi = OmiseApi(
     publicKey: "your_public_key_here", // Replace with your actual public key
     secretKey: "your_secret_key_here", // Replace with your actual secret key
-    enableDebug: true, // Enables debug logging
+    enableDebug: false, // Enables debug logging
   );
 
   // Create a token using card details
@@ -25,6 +25,23 @@ Future<void> main() async {
   final retrievedToken = await omiseApi.tokens.get(token.id);
 
   print('Token retrieved: ${retrievedToken.id}');
+
+  // Create a source
+  final createSourceRequest = CreateSourceRequest(
+      name: "Name",
+      amount: 2000,
+      currency: Currency.thb,
+      type: PaymentMethodName.promptpay);
+
+  // Call the Omise API to create a source
+  final source = await omiseApi.sources.create(createSourceRequest);
+
+  print('Source created: ${source.id}');
+
+  // Retrieve token information using the token ID
+  final retrievedSource = await omiseApi.sources.get(source.id);
+
+  print('Source retrieved: ${retrievedSource.id}');
 
   // Fetch capability information from the Omise API
   final capability = await omiseApi.capability.get();
