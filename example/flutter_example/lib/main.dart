@@ -84,7 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   : "Current source id: ${source!.id}",
             ),
             loading
-                ? Center(
+                ? const Center(
                     child: CircularProgressIndicator(),
                   )
                 : Column(
