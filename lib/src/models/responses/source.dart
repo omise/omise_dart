@@ -130,7 +130,7 @@ class Source extends BaseResponse {
       'bank': bank?.value,
       'barcode': barcode,
       'billing': billing?.toJson(),
-      'charge_status': chargeStatus,
+      'charge_status': chargeStatus.name,
       'created_at': createdAt.toIso8601StringWithoutMilliseconds(),
       'currency': currency,
       'discounts': discounts,
@@ -288,7 +288,7 @@ class Document extends BaseResponse {
       'filename': filename,
       'kind': kind,
       'download_uri': downloadUri,
-      'created_at': createdAt.toIso8601String(),
+      'created_at': createdAt.toIso8601StringWithoutMilliseconds(),
     });
     return baseJson;
   }

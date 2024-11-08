@@ -1,5 +1,6 @@
 import 'package:omise_dart/omise_dart.dart';
 import 'package:omise_dart/src/omise_http_client.dart';
+import 'package:omise_dart/src/services/sources_api.dart';
 import 'package:omise_dart/src/services/tokens_api.dart';
 import 'package:test/test.dart';
 
@@ -15,9 +16,8 @@ void main() {
         userAgent: 'TestAgent/1.0',
       );
 
-      // Assert: Verify that TokensApi is initialized and accessible
-      expect(omiseApi.tokens, isNotNull);
       expect(omiseApi.tokens, isA<TokensApi>());
+      expect(omiseApi.sources, isA<SourcesApi>());
     });
 
     test('should correctly pass parameters to OmiseHttpClient', () {
@@ -42,6 +42,16 @@ void main() {
       expect(capturedHttpClient.enableDebug, isTrue);
       expect(capturedHttpClient.ignoreNullKeys, isFalse);
       expect(capturedHttpClient.userAgent, equals('CustomUserAgent/1.0'));
+
+      // Extract the internal httpClient from SourcesApi to verify that it has the correct properties
+      capturedHttpClient = omiseApi.sources.httpClient;
+
+      // Assert: Verify that the correct parameters were passed to the OmiseHttpClient
+      expect(capturedHttpClient.publicKey, equals('test_public_key'));
+      expect(capturedHttpClient.secretKey, equals('test_secret_key'));
+      expect(capturedHttpClient.enableDebug, isTrue);
+      expect(capturedHttpClient.ignoreNullKeys, isFalse);
+      expect(capturedHttpClient.userAgent, equals('CustomUserAgent/1.0'));
     });
 
     test(
@@ -54,11 +64,21 @@ void main() {
       );
 
       // Assert: Ensure the TokensApi is initialized correctly
-      expect(omiseApi.tokens, isNotNull);
       expect(omiseApi.tokens, isA<TokensApi>());
+      expect(omiseApi.sources, isA<SourcesApi>());
 
       // Check the internal HTTP client values
-      final httpClient = omiseApi.tokens.httpClient;
+      var httpClient = omiseApi.tokens.httpClient;
+      expect(httpClient.publicKey, equals('test_public_key'));
+      expect(httpClient.secretKey, equals('test_secret_key'));
+      expect(httpClient.enableDebug, isNull);
+      expect(httpClient.ignoreNullKeys, isNull);
+      expect(httpClient.userAgent, isNull);
+
+      // Extract the internal httpClient from SourcesApi to verify that it has the correct properties
+      httpClient = omiseApi.sources.httpClient;
+
+      // Check the internal HTTP client values
       expect(httpClient.publicKey, equals('test_public_key'));
       expect(httpClient.secretKey, equals('test_secret_key'));
       expect(httpClient.enableDebug, isNull);
