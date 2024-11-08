@@ -35,6 +35,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   Token? token;
+  Source? source;
   bool loading = false;
 // Initialize the Omise API with your public and secret keys
   final omiseApi = OmiseApi(
@@ -46,6 +47,12 @@ class _MyHomePageState extends State<MyHomePage> {
   void updateToken(Token newToken) {
     setState(() {
       token = newToken;
+    });
+  }
+
+  void updateSource(Source newSource) {
+    setState(() {
+      source = newSource;
     });
   }
 
@@ -71,30 +78,59 @@ class _MyHomePageState extends State<MyHomePage> {
                   ? "Click to generate a token"
                   : "Current token id: ${token!.id}",
             ),
+            Text(
+              source == null
+                  ? "Click to generate a source"
+                  : "Current source id: ${source!.id}",
+            ),
+            loading
+                ? Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : Column(
+                    children: [
+                      ElevatedButton(
+                        onPressed: () async {
+                          setLoading(true);
+                          try {
+                            final token =
+                                await omiseApi.tokens.create(CreateTokenRequest(
+                              name: "Name",
+                              number:
+                                  "4242424242424242", // Example test card number
+                              expirationMonth: "09", // Card expiry month
+                              expirationYear: "27", // Card expiry year
+                            ));
+                            updateToken(token);
+                          } catch (e) {
+                            log(e.toString());
+                          }
+                          setLoading(false);
+                        },
+                        child: const Text("Create token"),
+                      ),
+                      ElevatedButton(
+                        onPressed: () async {
+                          setLoading(true);
+                          try {
+                            final source = await omiseApi.sources
+                                .create(CreateSourceRequest(
+                              amount: 2000,
+                              currency: Currency.thb,
+                              type: PaymentMethodName.promptpay,
+                            ));
+                            updateSource(source);
+                          } catch (e) {
+                            log(e.toString());
+                          }
+                          setLoading(false);
+                        },
+                        child: const Text("Create source"),
+                      ),
+                    ],
+                  )
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          setLoading(true);
-          try {
-            final token = await omiseApi.tokens.create(CreateTokenRequest(
-              name: "Name",
-              number: "4242424242424242", // Example test card number
-              expirationMonth: "09", // Card expiry month
-              expirationYear: "27", // Card expiry year
-            ));
-            updateToken(token);
-          } catch (e) {
-            log(e.toString());
-          }
-          setLoading(false);
-        },
-        child: loading
-            ? const Center(
-                child: CircularProgressIndicator(),
-              )
-            : const Icon(Icons.generating_tokens),
       ),
     );
   }
