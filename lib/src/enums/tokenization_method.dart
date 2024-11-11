@@ -8,9 +8,9 @@ enum TokenizationMethod {
 }
 
 extension TokenizationMethodExtension on TokenizationMethod {
-  static TokenizationMethod fromString(String tokenizationName) {
+  static TokenizationMethod fromString(String? tokenizationName) {
     return TokenizationMethod.values.firstWhere(
-      (method) => method.value.toLowerCase() == tokenizationName.toLowerCase(),
+      (method) => method.value.toLowerCase() == tokenizationName?.toLowerCase(),
       orElse: () => TokenizationMethod.unknown,
     );
   }

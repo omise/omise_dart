@@ -40,9 +40,9 @@ enum Bank {
 }
 
 extension BankExtension on Bank {
-  static Bank fromString(String value) {
+  static Bank fromString(String? value) {
     return Bank.values.firstWhere(
-      (bank) => bank.value.toLowerCase() == value.toLowerCase(),
+      (bank) => bank.value.toLowerCase() == value?.toLowerCase(),
       orElse: () => Bank.unknown,
     );
   }
