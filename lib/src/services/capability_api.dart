@@ -32,12 +32,12 @@ class CapabilityApi {
       return Capability.fromJson(
         decodedBody,
       );
-    } else {
-      throw OmiseApiException(
-        message: OmiseApiErrors.unableToGetCapability.message,
-        statusCode: response.statusCode,
-        response: OmiseApiError.fromJson(decodedBody),
-      );
     }
+
+    throw OmiseApiException(
+      message: OmiseApiErrors.unableToGetCapability.message,
+      statusCode: response.statusCode,
+      response: OmiseApiError.fromJson(decodedBody),
+    );
   }
 }

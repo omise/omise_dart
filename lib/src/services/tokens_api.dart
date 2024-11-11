@@ -36,13 +36,13 @@ class TokensApi {
       return Token.fromJson(
         decodedBody,
       );
-    } else {
-      throw OmiseApiException(
-        message: OmiseApiErrors.unableToCreateToken.message,
-        statusCode: response.statusCode,
-        response: OmiseApiError.fromJson(decodedBody),
-      );
     }
+
+    throw OmiseApiException(
+      message: OmiseApiErrors.unableToCreateToken.message,
+      statusCode: response.statusCode,
+      response: OmiseApiError.fromJson(decodedBody),
+    );
   }
 
   /// Retrieves a token by its [tokenId].
@@ -62,12 +62,12 @@ class TokensApi {
       return Token.fromJson(
         decodedBody,
       );
-    } else {
-      throw OmiseApiException(
-        message: OmiseApiErrors.unableToGetToken.message,
-        statusCode: response.statusCode,
-        response: OmiseApiError.fromJson(decodedBody),
-      );
     }
+
+    throw OmiseApiException(
+      message: OmiseApiErrors.unableToGetToken.message,
+      statusCode: response.statusCode,
+      response: OmiseApiError.fromJson(decodedBody),
+    );
   }
 }

@@ -34,13 +34,13 @@ class SourcesApi {
       return Source.fromJson(
         decodedBody,
       );
-    } else {
-      throw OmiseApiException(
-        message: OmiseApiErrors.unableToCreateSource.message,
-        statusCode: response.statusCode,
-        response: OmiseApiError.fromJson(decodedBody),
-      );
     }
+
+    throw OmiseApiException(
+      message: OmiseApiErrors.unableToCreateSource.message,
+      statusCode: response.statusCode,
+      response: OmiseApiError.fromJson(decodedBody),
+    );
   }
 
   /// Retrieves a source by its [sourceId].
@@ -60,12 +60,11 @@ class SourcesApi {
       return Source.fromJson(
         decodedBody,
       );
-    } else {
-      throw OmiseApiException(
-        message: OmiseApiErrors.unableToGetSource.message,
-        statusCode: response.statusCode,
-        response: OmiseApiError.fromJson(decodedBody),
-      );
     }
+    throw OmiseApiException(
+      message: OmiseApiErrors.unableToGetSource.message,
+      statusCode: response.statusCode,
+      response: OmiseApiError.fromJson(decodedBody),
+    );
   }
 }
