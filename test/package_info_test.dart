@@ -7,6 +7,10 @@ void main() {
       expect(PackageInfo.packageName, 'omise_dart');
     });
 
+    test('should return correct userAgentIdentifier', () {
+      expect(PackageInfo.userAgentIdentifier, 'OmiseDart');
+    });
+
     test('should return correct package version', () {
       expect(PackageInfo.packageVersion, '0.2.0');
     });

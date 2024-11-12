@@ -1,6 +1,7 @@
-import 'package:omise_dart/omise_dart.dart';
 import 'package:omise_dart/src/enums/absorption_type.dart';
+import 'package:omise_dart/src/enums/bank.dart';
 import 'package:omise_dart/src/enums/charge_status.dart';
+import 'package:omise_dart/src/enums/currency.dart';
 import 'package:omise_dart/src/enums/payment_method_name.dart';
 import 'package:omise_dart/src/extensions/date_time_no_milliseconds.dart';
 import 'package:omise_dart/src/models/responses/source.dart';
@@ -18,7 +19,7 @@ void main() {
         amount: 1000,
         chargeStatus: ChargeStatus.pending,
         createdAt: createdAt,
-        currency: 'THB',
+        currency: Currency.thb,
         flow: 'redirect',
         type: PaymentMethodName.promptpay,
         absorptionType: AbsorptionType.customer,
@@ -45,7 +46,7 @@ void main() {
       expect(sourceFromJson.amount, 1000);
       expect(sourceFromJson.chargeStatus, ChargeStatus.pending);
       expect(sourceFromJson.createdAt, createdAt);
-      expect(sourceFromJson.currency, 'THB');
+      expect(sourceFromJson.currency, Currency.thb);
       expect(sourceFromJson.flow, 'redirect');
       expect(sourceFromJson.type, PaymentMethodName.promptpay);
       expect(sourceFromJson.absorptionType, AbsorptionType.customer);

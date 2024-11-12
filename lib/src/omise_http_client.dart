@@ -89,8 +89,8 @@ class OmiseHttpClient {
       return userAgent!;
     }
     final sdkVersion = PackageInfo.packageVersion;
-    final packageName = PackageInfo.packageName;
-    return 'dart/${Platform.version} $packageName/$sdkVersion (${Platform.operatingSystem} ${Platform.operatingSystemVersion})';
+    final userAgentIdentifier = PackageInfo.userAgentIdentifier;
+    return 'dart/${Platform.version} $userAgentIdentifier/$sdkVersion (${Platform.operatingSystem} ${Platform.operatingSystemVersion})';
   }
 
   /// Returns the HTTP headers required for Omise API requests.
