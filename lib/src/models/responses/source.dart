@@ -1,6 +1,7 @@
 import 'package:omise_dart/src/enums/absorption_type.dart';
 import 'package:omise_dart/src/enums/bank.dart';
 import 'package:omise_dart/src/enums/charge_status.dart';
+import 'package:omise_dart/src/enums/currency.dart';
 import 'package:omise_dart/src/enums/payment_method_name.dart';
 import 'package:omise_dart/src/models/requests/create_source_request.dart';
 import 'package:omise_dart/src/models/responses/base_response.dart';
@@ -14,7 +15,7 @@ class Source extends BaseResponse {
   final BillingAddress? billing;
   final ChargeStatus chargeStatus;
   final DateTime createdAt;
-  final String currency;
+  final Currency currency;
   final List? discounts;
   final String? email;
   final String flow;
@@ -87,7 +88,7 @@ class Source extends BaseResponse {
           : null,
       chargeStatus: ChargeStatusExtension.fromString(json['charge_status']),
       createdAt: DateTime.parse(json['created_at']),
-      currency: json['currency'],
+      currency: CurrencyExtension.fromString(json['currency']),
       discounts: json['discounts'] != null ? (json['discounts'] as List) : null,
       email: json['email'],
       flow: json['flow'],
@@ -132,7 +133,7 @@ class Source extends BaseResponse {
       'billing': billing?.toJson(),
       'charge_status': chargeStatus.name,
       'created_at': createdAt.toIso8601StringWithoutMilliseconds(),
-      'currency': currency,
+      'currency': currency.value,
       'discounts': discounts,
       'email': email,
       'flow': flow,
