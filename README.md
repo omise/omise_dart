@@ -6,6 +6,7 @@
 
 - Easily interact with Omise's API in Dart and Flutter.
 - Support for tokenization.
+- Support for source creation.
 - Built-in error handling for common API issues.
 
 ## Getting Started
