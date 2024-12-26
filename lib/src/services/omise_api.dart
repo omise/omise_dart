@@ -2,6 +2,7 @@ import 'package:omise_dart/src/omise_http_client.dart';
 import 'package:omise_dart/src/services/capability_api.dart';
 import 'package:omise_dart/src/services/sources_api.dart';
 import 'package:omise_dart/src/services/tokens_api.dart';
+import 'package:omise_dart/src/utils.dart';
 
 /// A main entry point for interacting with the Omise API.
 ///
@@ -32,6 +33,9 @@ class OmiseApi {
     bool? ignoreNullKeys,
     String? userAgent,
   }) {
+    if (secretKey != null) {
+      Utils.isFrontEndEnvironment();
+    }
     // Create the HTTP client using the provided parameters
     final OmiseHttpClient omiseHttpClient = OmiseHttpClient(
       publicKey: publicKey,
