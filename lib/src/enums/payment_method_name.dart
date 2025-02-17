@@ -68,6 +68,7 @@ enum PaymentMethodName {
   directDebitScb('direct_debit_scb'),
   duitnowObw('duitnow_obw'),
   duitnowQr('duitnow_qr'),
+  mayBankQr('maybank_qr'),
 
   /// Represents an unknown payment method.
   /// This value is used as a fallback when a payment method is received from the backend
