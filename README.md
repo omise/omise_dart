@@ -15,7 +15,7 @@ To use the package, first add it to your project by including the following in y
 
 ```yaml
 dependencies:
-  omise_dart: ^0.3.0
+  omise_dart: ^0.4.0
 ```
 
 Then, run:
