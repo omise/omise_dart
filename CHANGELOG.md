@@ -1,3 +1,9 @@
+## 0.4.0
+
+### Added
+
+- Added new source `maybank_qr`.
+
 ## 0.3.0
 
 ### New Features
