@@ -1,13 +1,13 @@
-import 'package:omise_dart/src/enums/bank.dart';
 import 'package:omise_dart/src/enums/card_brand.dart';
 import 'package:omise_dart/src/enums/currency.dart';
+import 'package:omise_dart/src/enums/fpx_bank_code.dart';
 import 'package:omise_dart/src/enums/payment_method_name.dart';
 import 'package:omise_dart/src/enums/tokenization_method.dart';
 
 class Capability {
   final String object;
   final String location;
-  final List<Bank> banks;
+  final List<String> banks;
   final Limits limits;
   final List<PaymentMethod> paymentMethods;
   final List<TokenizationMethod> tokenizationMethods;
@@ -29,9 +29,7 @@ class Capability {
     return Capability(
       object: json['object'],
       location: json['location'],
-      banks: (json['banks'] as List)
-          .map((item) => BankExtension.fromString(item))
-          .toList(),
+      banks: (json['banks'] as List).map((item) => item as String).toList(),
       limits: Limits.fromJson(json['limits']),
       paymentMethods: (json['payment_methods'] as List)
           .map((item) => PaymentMethod.fromJson(item))
@@ -48,7 +46,7 @@ class Capability {
     return {
       'object': object,
       'location': location,
-      'banks': banks.map((bank) => bank.value).toList(),
+      'banks': banks,
       'limits': limits.toJson(),
       'payment_methods': paymentMethods.map((pm) => pm.toJson()).toList(),
       'tokenization_methods':
@@ -134,6 +132,34 @@ class InstallmentAmount {
   }
 }
 
+class Bank {
+  final FpxBankCode code;
+  final String name;
+  final bool active;
+
+  Bank({
+    required this.code,
+    required this.name,
+    required this.active,
+  });
+
+  factory Bank.fromJson(Map<String, dynamic> json) {
+    return Bank(
+      code: FpxBankCodeExtension.fromString(json['code']),
+      name: json['name'] as String,
+      active: json['active'] as bool,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'code': code.value,
+      'name': name,
+      'active': active,
+    };
+  }
+}
+
 // PaymentMethod model
 class PaymentMethod {
   final String object;
@@ -169,9 +195,8 @@ class PaymentMethod {
       installmentTerms: json['installment_terms'] != null
           ? List<int>.from(json['installment_terms'])
           : null,
-      banks: (json['banks'] as List)
-          .map((item) => BankExtension.fromString(item))
-          .toList(),
+      banks:
+          (json['banks'] as List).map((item) => Bank.fromJson(item)).toList(),
       provider: json['provider'],
     );
   }
@@ -183,7 +208,7 @@ class PaymentMethod {
       'currencies': currencies.map((currency) => currency.value).toList(),
       'card_brands': cardBrands?.map((cardBrand) => cardBrand.value).toList(),
       'installment_terms': installmentTerms,
-      'banks': banks.map((bank) => bank.value).toList(),
+      'banks': banks.map((bank) => bank.toJson()).toList(),
       'provider': provider,
     };
   }
