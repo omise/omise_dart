@@ -1,5 +1,4 @@
 import 'package:omise_dart/src/enums/absorption_type.dart';
-import 'package:omise_dart/src/enums/bank.dart';
 import 'package:omise_dart/src/enums/charge_status.dart';
 import 'package:omise_dart/src/enums/currency.dart';
 import 'package:omise_dart/src/enums/payment_method_name.dart';
@@ -23,7 +22,7 @@ void main() {
         flow: 'redirect',
         type: PaymentMethodName.promptpay,
         absorptionType: AbsorptionType.customer,
-        bank: Bank.scb,
+        bank: 'scb',
       );
 
       final json = source.toJson();
@@ -50,7 +49,7 @@ void main() {
       expect(sourceFromJson.flow, 'redirect');
       expect(sourceFromJson.type, PaymentMethodName.promptpay);
       expect(sourceFromJson.absorptionType, AbsorptionType.customer);
-      expect(sourceFromJson.bank, Bank.scb);
+      expect(sourceFromJson.bank, 'scb');
     });
 
     test('ProviderReferences serialization and deserialization', () {

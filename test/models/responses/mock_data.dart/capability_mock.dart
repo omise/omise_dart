@@ -15,7 +15,9 @@ class CapabilityMock {
         'currencies': ['THB', 'USD'],
         'card_brands': ['Visa', 'MasterCard'],
         'installment_terms': [3, 6],
-        'banks': ['bbl'],
+        'banks': [
+          {"code": "affin", "name": "Affin Bank", "active": true}
+        ],
         'provider': 'visa',
       }
     ],

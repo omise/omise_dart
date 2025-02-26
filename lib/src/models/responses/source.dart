@@ -1,5 +1,4 @@
 import 'package:omise_dart/src/enums/absorption_type.dart';
-import 'package:omise_dart/src/enums/bank.dart';
 import 'package:omise_dart/src/enums/charge_status.dart';
 import 'package:omise_dart/src/enums/currency.dart';
 import 'package:omise_dart/src/enums/payment_method_name.dart';
@@ -10,7 +9,7 @@ import 'package:omise_dart/src/extensions/date_time_no_milliseconds.dart';
 class Source extends BaseResponse {
   final AbsorptionType? absorptionType;
   final int amount;
-  final Bank? bank;
+  final String? bank;
   final String? barcode;
   final BillingAddress? billing;
   final ChargeStatus chargeStatus;
@@ -81,7 +80,7 @@ class Source extends BaseResponse {
       absorptionType:
           AbsorptionTypeExtension.fromString(json['absorption_type']),
       amount: json['amount'],
-      bank: BankExtension.fromString(json['bank']),
+      bank: json['bank'],
       barcode: json['barcode'],
       billing: json['billing'] != null
           ? BillingAddress.fromJson(json['billing'])
@@ -128,7 +127,7 @@ class Source extends BaseResponse {
     baseResponse.addAll({
       'absorption_type': absorptionType?.value,
       'amount': amount,
-      'bank': bank?.value,
+      'bank': bank,
       'barcode': barcode,
       'billing': billing?.toJson(),
       'charge_status': chargeStatus.name,

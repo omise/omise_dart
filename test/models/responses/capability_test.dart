@@ -1,5 +1,5 @@
-import 'package:omise_dart/src/enums/bank.dart';
 import 'package:omise_dart/src/enums/card_brand.dart';
+import 'package:omise_dart/src/enums/fpx_bank_code.dart';
 import 'package:omise_dart/src/enums/payment_method_name.dart';
 import 'package:omise_dart/src/enums/tokenization_method.dart';
 import 'package:omise_dart/src/models/responses/capability.dart';
@@ -15,7 +15,7 @@ void main() {
 
       expect(capability.object, 'capability');
       expect(capability.location, '/capability');
-      expect(capability.banks, [Bank.bbl, Bank.kbank]);
+      expect(capability.banks, ['bbl', 'kbank']);
       expect(capability.tokenizationMethods,
           [TokenizationMethod.googlepay, TokenizationMethod.applepay]);
       expect(capability.zeroInterestInstallments, true);
@@ -36,7 +36,7 @@ void main() {
       expect(paymentMethod.currencies, [Currency.thb, Currency.usd]);
       expect(paymentMethod.cardBrands, [CardBrand.visa, CardBrand.masterCard]);
       expect(paymentMethod.installmentTerms, [3, 6]);
-      expect(paymentMethod.banks, [Bank.bbl]);
+      expect(paymentMethod.banks.first.code, FpxBankCode.affin);
       expect(paymentMethod.provider, 'visa');
     });
 
@@ -44,7 +44,7 @@ void main() {
       final capability = Capability(
         object: 'capability',
         location: '/capability/123',
-        banks: [Bank.bbl, Bank.kbank],
+        banks: ['bbl', 'kbank'],
         limits: Limits(
           chargeAmount: Amount(max: 10000, min: 100),
           transferAmount: Amount(max: 5000, min: 50),
@@ -57,7 +57,7 @@ void main() {
             currencies: [Currency.thb, Currency.usd],
             cardBrands: [CardBrand.visa, CardBrand.masterCard],
             installmentTerms: [3, 6],
-            banks: [Bank.bbl],
+            banks: [Bank(code: FpxBankCode.affin, name: "name", active: true)],
             provider: 'visa',
           )
         ],
@@ -93,7 +93,9 @@ void main() {
       expect(paymentMethodJson['currencies'], ['THB', 'USD']);
       expect(paymentMethodJson['card_brands'], ['Visa', 'MasterCard']);
       expect(paymentMethodJson['installment_terms'], [3, 6]);
-      expect(paymentMethodJson['banks'], ['bbl']);
+      expect(paymentMethodJson['banks'], [
+        {'code': 'affin', 'name': 'name', 'active': true}
+      ]);
       expect(paymentMethodJson['provider'], 'visa');
     });
 

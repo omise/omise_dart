@@ -42,7 +42,7 @@ void main() {
         expect(result, isA<Capability>());
         expect(result.object, 'capability');
         expect(result.location, '/capability');
-        expect(result.banks, [Bank.bbl, Bank.kbank]);
+        expect(result.banks, ['bbl', 'kbank']);
         expect(result.zeroInterestInstallments, true);
         expect(result.limits.chargeAmount.max, 100000);
         expect(result.paymentMethods.first.name, PaymentMethodName.card);

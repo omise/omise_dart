@@ -11,6 +11,7 @@ enum Currency {
   cny('CNY'),
   dkk('DKK'),
   hkd('HKD'),
+  myr('MYR'),
 
   /// Represents an unknown currency, used to handle cases where the currency is not recognized.
   unknown('unknown');
