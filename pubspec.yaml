@@ -1,7 +1,7 @@
 name: omise_dart
 description: A Dart SDK that serves as an API wrapper for the Omise API.
 
-version: 0.4.0
+version: 0.5.0
 repository: https://github.com/omise/omise_dart
 
 environment:
