@@ -1,5 +1,5 @@
 import 'package:omise_dart/src/enums/card_brand.dart';
-import 'package:omise_dart/src/enums/fpx_bank_code.dart';
+import 'package:omise_dart/src/enums/bank_code.dart';
 import 'package:omise_dart/src/enums/payment_method_name.dart';
 import 'package:omise_dart/src/enums/tokenization_method.dart';
 import 'package:omise_dart/src/models/responses/capability.dart';
@@ -36,7 +36,7 @@ void main() {
       expect(paymentMethod.currencies, [Currency.thb, Currency.usd]);
       expect(paymentMethod.cardBrands, [CardBrand.visa, CardBrand.masterCard]);
       expect(paymentMethod.installmentTerms, [3, 6]);
-      expect(paymentMethod.banks.first.code, FpxBankCode.affin);
+      expect(paymentMethod.banks.first.code, BankCode.affin);
       expect(paymentMethod.provider, 'visa');
     });
 
@@ -57,7 +57,7 @@ void main() {
             currencies: [Currency.thb, Currency.usd],
             cardBrands: [CardBrand.visa, CardBrand.masterCard],
             installmentTerms: [3, 6],
-            banks: [Bank(code: FpxBankCode.affin, name: "name", active: true)],
+            banks: [Bank(code: BankCode.affin, name: "name", active: true)],
             provider: 'visa',
           )
         ],
