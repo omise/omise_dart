@@ -1,4 +1,4 @@
-enum FpxBankCode {
+enum BankCode {
   affin('affin'),
   agro('agro'),
   alliance('alliance'),
@@ -29,14 +29,14 @@ enum FpxBankCode {
 
   final String value;
 
-  const FpxBankCode(this.value);
+  const BankCode(this.value);
 }
 
-extension FpxBankCodeExtension on FpxBankCode {
-  static FpxBankCode fromString(String? value) {
-    return FpxBankCode.values.firstWhere(
+extension BankCodeExtension on BankCode {
+  static BankCode fromString(String? value) {
+    return BankCode.values.firstWhere(
       (bank) => bank.value.toLowerCase() == value?.toLowerCase(),
-      orElse: () => FpxBankCode.unknown,
+      orElse: () => BankCode.unknown,
     );
   }
 }
