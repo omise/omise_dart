@@ -12,5 +12,5 @@ export 'src/enums/payment_method_name.dart';
 export 'src/enums/tokenization_method.dart';
 export 'src/enums/omise_api_errors.dart';
 export 'src/enums/charge_status.dart';
-export 'src/enums/fpx_bank_code.dart';
+export 'src/enums/bank_code.dart';
 export 'src/exceptions/omise_api_exception.dart';

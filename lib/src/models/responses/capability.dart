@@ -1,6 +1,6 @@
 import 'package:omise_dart/src/enums/card_brand.dart';
 import 'package:omise_dart/src/enums/currency.dart';
-import 'package:omise_dart/src/enums/fpx_bank_code.dart';
+import 'package:omise_dart/src/enums/bank_code.dart';
 import 'package:omise_dart/src/enums/payment_method_name.dart';
 import 'package:omise_dart/src/enums/tokenization_method.dart';
 
@@ -133,7 +133,7 @@ class InstallmentAmount {
 }
 
 class Bank {
-  final FpxBankCode code;
+  final BankCode code;
   final String name;
   final bool active;
 
@@ -145,7 +145,7 @@ class Bank {
 
   factory Bank.fromJson(Map<String, dynamic> json) {
     return Bank(
-      code: FpxBankCodeExtension.fromString(json['code']),
+      code: BankCodeExtension.fromString(json['code']),
       name: json['name'] as String,
       active: json['active'] as bool,
     );

@@ -26,10 +26,13 @@ class TokensApi {
   ///
   /// Throws an [OmiseApiException] if the request fails. The exception includes
   /// the error message and status code, along with the response from the API.
-  Future<Token> create(CreateTokenRequest createTokenRequest) async {
+  Future<Token> create(CreateTokenRequest createTokenRequest,
+      {bool? isTokenizationMethod}) async {
     final response = await httpClient.post(
       '/tokens',
-      body: {'card': createTokenRequest.toJson()},
+      body: isTokenizationMethod == true
+          ? {'tokenization': createTokenRequest.toJson()}
+          : {'card': createTokenRequest.toJson()},
     );
     final decodedBody = json.decode(response.body);
     if (response.statusCode == 200) {
