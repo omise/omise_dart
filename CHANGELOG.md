@@ -1,3 +1,9 @@
+## 0.5.0
+
+### Added
+
+- Support non card tokenization in token api request.
+
 ## 0.4.0
 
 ### Added
