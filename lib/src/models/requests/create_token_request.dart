@@ -28,6 +28,7 @@ class CreateTokenRequest {
   String? billingStreet1;
   String? billingStreet2;
   String? billingPhoneNumber;
+  String? brand;
 
   CreateTokenRequest({
     // Card payment parameters
@@ -57,6 +58,7 @@ class CreateTokenRequest {
     this.billingStreet1,
     this.billingStreet2,
     this.billingPhoneNumber,
+    this.brand,
   });
 
   factory CreateTokenRequest.fromJson(Map<String, dynamic> json) {
@@ -85,6 +87,7 @@ class CreateTokenRequest {
       billingStreet1: json['billing_street1'],
       billingStreet2: json['billing_street2'],
       billingPhoneNumber: json['billing_phone_number'],
+      brand: json['brand'],
     );
   }
 
@@ -114,6 +117,7 @@ class CreateTokenRequest {
       'billing_street1': billingStreet1,
       'billing_street2': billingStreet2,
       'billing_phone_number': billingPhoneNumber,
+      'brand': brand,
     };
   }
 }
