@@ -19,6 +19,7 @@ class CreateTokenRequest {
   // Google Pay / Apple Pay Fields
   TokenizationMethod? method; // "googlepay" or "applepay"
   String? data; // Tokenized payment data
+  String? merchantId;
   String? billingName;
   String? billingCity;
   String? billingCountry;
@@ -46,6 +47,7 @@ class CreateTokenRequest {
 
     // Google Pay / Apple Pay parameters
     this.method,
+    this.merchantId,
     this.data,
     this.billingName,
     this.billingCity,
@@ -73,6 +75,7 @@ class CreateTokenRequest {
       street1: json['street1'],
       street2: json['street2'],
       method: TokenizationMethodExtension.fromString(json['method']),
+      merchantId: json['merchant_id'],
       data: json['data'],
       billingName: json['billing_name'],
       billingCity: json['billing_city'],
@@ -101,6 +104,7 @@ class CreateTokenRequest {
       'street1': street1,
       'street2': street2,
       'method': method?.value,
+      'merchant_id': merchantId,
       'data': data,
       'billing_name': billingName,
       'billing_city': billingCity,

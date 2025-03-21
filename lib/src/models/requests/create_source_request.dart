@@ -178,20 +178,20 @@ class ShippingAddress {
 }
 
 class Item {
-  int? amount;
-  String? sku;
-  String? name;
-  int? quantity;
+  int amount;
+  String sku;
+  String name;
+  int quantity;
   String? category;
   String? brand;
   String? itemUri;
   String? imageUri;
 
   Item({
-    this.amount,
-    this.sku,
-    this.name,
-    this.quantity,
+    required this.amount,
+    required this.sku,
+    required this.name,
+    required this.quantity,
     this.category,
     this.brand,
     this.itemUri,
