@@ -62,6 +62,12 @@ void main() async {
 }
 ```
 
+### Note on Amount
+
+When specifying the `amount` in payment requests, ensure that you follow Omise's subunits convention. The amount should be in the smallest currency unit (e.g., satangs for THB, cents for USD).
+
+For more details, refer to the [Omise API documentation on subunits](https://docs.omise.co/currency-and-amount).
+
 For more detailed examples, including how to get account capabilities, check the [example](example/) folder.
 
 ## Example
