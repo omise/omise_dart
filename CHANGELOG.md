@@ -1,3 +1,9 @@
+## 0.6.0
+
+### Added
+
+- Support apple pay tokenization.
+
 ## 0.5.0
 
 ### Added
