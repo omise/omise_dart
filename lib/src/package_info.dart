@@ -11,7 +11,7 @@ class PackageInfo {
   /// The version of the package.
   ///
   /// This constant holds the package's version as defined in `pubspec.yaml`.
-  static const String packageVersion = '0.5.0';
+  static const String packageVersion = '0.6.0';
 
   static const String userAgentIdentifier = "OmiseDart";
 }
