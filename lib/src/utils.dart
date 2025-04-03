@@ -36,8 +36,6 @@ class Utils {
       if (Platform.isIOS) return "IOS";
       return '';
     } catch (e) {
-      print('error registered $e');
-      print('setting to web');
       // If dart:io is not available, assume Web
       return "WEB";
     }
