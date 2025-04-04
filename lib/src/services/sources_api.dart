@@ -6,6 +6,7 @@ import 'package:omise_dart/src/models/requests/create_source_request.dart';
 import 'package:omise_dart/src/models/responses/omise_api_error.dart';
 import 'package:omise_dart/src/models/responses/source.dart';
 import 'package:omise_dart/src/omise_http_client.dart';
+import 'package:omise_dart/src/utils.dart';
 
 /// Provides methods for interacting with the source endpoints of the Omise API.
 class SourcesApi {
@@ -25,6 +26,9 @@ class SourcesApi {
   /// Throws an [OmiseApiException] if the request fails. The exception includes
   /// the error message and status code, along with the response from the API.
   Future<Source> create(CreateSourceRequest createSourceRequest) async {
+    // set the platform type for all source creation operations, like android, iOS or web
+    createSourceRequest.platformType = Utils.getPlatform();
+
     final response = await httpClient.post(
       '/sources',
       body: createSourceRequest.toJson(),
