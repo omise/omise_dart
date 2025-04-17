@@ -47,4 +47,12 @@ Future<void> main() async {
   final capability = await omiseApi.capability.get();
 
   print('Capability retrieved: ${capability.country}');
+
+  final charge = await omiseApi.charges.create(CreateChargeRequest(
+      amount: 2000, currency: Currency.thb, source: source.id));
+  print("Charge created: ${charge.id}");
+
+  final retrievedCharge = await omiseApi.charges.get(charge.id);
+
+  print('Charge retrieved: ${retrievedCharge.id}');
 }

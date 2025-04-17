@@ -1,12 +1,13 @@
 import 'package:omise_dart/omise_dart.dart';
 import 'package:omise_dart/src/omise_http_client.dart';
+import 'package:omise_dart/src/services/charges_api.dart';
 import 'package:omise_dart/src/services/sources_api.dart';
 import 'package:omise_dart/src/services/tokens_api.dart';
 import 'package:test/test.dart';
 
 void main() {
   group('OmiseApi Tests', () {
-    test('should initialize TokensApi with proper HTTP client', () {
+    test('should initialize all Apis with proper HTTP client', () {
       // Arrange: Create an instance of OmiseApi with dummy keys and parameters
       final omiseApi = OmiseApi(
         publicKey: 'test_public_key',
@@ -18,6 +19,7 @@ void main() {
 
       expect(omiseApi.tokens, isA<TokensApi>());
       expect(omiseApi.sources, isA<SourcesApi>());
+      expect(omiseApi.charges, isA<ChargesApi>());
     });
 
     test('should correctly pass parameters to OmiseHttpClient', () {
@@ -63,9 +65,10 @@ void main() {
         secretKey: 'test_secret_key',
       );
 
-      // Assert: Ensure the TokensApi is initialized correctly
+      // Assert: Ensure all the Apis are initialized correctly
       expect(omiseApi.tokens, isA<TokensApi>());
       expect(omiseApi.sources, isA<SourcesApi>());
+      expect(omiseApi.charges, isA<ChargesApi>());
 
       // Check the internal HTTP client values
       var httpClient = omiseApi.tokens.httpClient;
