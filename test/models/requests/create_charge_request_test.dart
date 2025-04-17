@@ -13,7 +13,7 @@ void main() {
         card: 'card_123',
         customer: 'cust_456',
         description: 'Test charge',
-        expiresAt: DateTime(2025, 4, 1, 12).toUtc(),
+        expiresAt: DateTime.utc(2025, 4, 1, 12),
         firstCharge: 'charge_001',
         ip: '127.0.0.1',
         linkedAccount: 'link_789',
@@ -36,7 +36,7 @@ void main() {
       expect(json['card'], 'card_123');
       expect(json['customer'], 'cust_456');
       expect(json['description'], 'Test charge');
-      expect(json['expires_at'], '2025-04-01T05:00:00Z');
+      expect(json['expires_at'], '2025-04-01T12:00:00Z');
       expect(json['first_charge'], 'charge_001');
       expect(json['ip'], '127.0.0.1');
       expect(json['linked_account'], 'link_789');
