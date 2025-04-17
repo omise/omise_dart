@@ -6,7 +6,9 @@ enum OmiseApiErrors {
   unableToCreateSource(message: "Unable to create source"),
   unableToGetSource(message: "Unable to get source"),
   secretKeyMustNotBeUsedInFrontendEnvironments(
-      message: 'Secret key must not be used in frontend environments');
+      message: 'Secret key must not be used in frontend environments'),
+  unableToCreateCharge(message: "Unable to create charge"),
+  unableToGetCharge(message: "Unable to get charge");
 
   final String message;
 
