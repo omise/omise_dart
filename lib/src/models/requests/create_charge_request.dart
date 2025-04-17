@@ -1,4 +1,5 @@
-import 'package:omise_dart/omise_dart.dart';
+import 'package:omise_dart/src/enums/authorization_type.dart';
+import 'package:omise_dart/src/enums/currency.dart';
 import 'package:omise_dart/src/extensions/date_time_no_milliseconds.dart';
 
 class CreateChargeRequest {

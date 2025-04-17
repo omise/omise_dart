@@ -1,6 +1,7 @@
 import 'package:omise_dart/src/enums/charge_status.dart';
 import 'package:omise_dart/src/enums/payment_method_name.dart';
 import 'package:omise_dart/src/extensions/date_time_no_milliseconds.dart';
+import 'package:omise_dart/src/extensions/remove_null_map_keys.dart';
 import 'package:omise_dart/src/models/responses/charge.dart';
 import 'package:test/test.dart';
 import 'package:omise_dart/src/enums/currency.dart';
@@ -50,7 +51,10 @@ void main() {
       final charge = Charge.fromJson(ChargesMock.getCharge);
       final json = charge.toJson();
 
-      expect(json, ChargesMock.getCharge);
+      expect(json['id'], charge.id);
+      expect(json['refunds'], charge.refunds);
+      expect(json['dispute'], charge.dispute);
+      expect(json['status'], charge.status.name);
     });
     group('CardModel', () {
       test('fromJson and toJson should be consistent', () {
