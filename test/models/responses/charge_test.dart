@@ -1,7 +1,6 @@
 import 'package:omise_dart/src/enums/charge_status.dart';
 import 'package:omise_dart/src/enums/payment_method_name.dart';
 import 'package:omise_dart/src/extensions/date_time_no_milliseconds.dart';
-import 'package:omise_dart/src/extensions/remove_null_map_keys.dart';
 import 'package:omise_dart/src/models/responses/charge.dart';
 import 'package:test/test.dart';
 import 'package:omise_dart/src/enums/currency.dart';
