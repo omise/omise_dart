@@ -311,10 +311,10 @@ class CardModel {
   final String object;
   final String id;
   final bool livemode;
-  final String location;
+  final String? location;
   final String bank;
   final String brand;
-  final String city;
+  final String? city;
   final String country;
   final DateTime createdAt;
   final bool deleted;
@@ -325,22 +325,22 @@ class CardModel {
   final String? firstDigits;
   final String lastDigits;
   final String name;
-  final String phoneNumber;
-  final String postalCode;
+  final String? phoneNumber;
+  final String? postalCode;
   final bool securityCodeCheck;
-  final String state;
-  final String street1;
-  final String street2;
+  final String? state;
+  final String? street1;
+  final String? street2;
   final String? tokenizationMethod;
 
   CardModel({
     required this.object,
     required this.id,
     required this.livemode,
-    required this.location,
+    this.location,
     required this.bank,
     required this.brand,
-    required this.city,
+    this.city,
     required this.country,
     required this.createdAt,
     required this.deleted,
@@ -351,12 +351,12 @@ class CardModel {
     this.firstDigits,
     required this.lastDigits,
     required this.name,
-    required this.phoneNumber,
-    required this.postalCode,
+    this.phoneNumber,
+    this.postalCode,
     required this.securityCodeCheck,
-    required this.state,
-    required this.street1,
-    required this.street2,
+    this.state,
+    this.street1,
+    this.street2,
     this.tokenizationMethod,
   });
 
@@ -499,7 +499,7 @@ class LinkedAccount {
   final String? failureMessage;
   final DateTime? registeredAt;
   final DateTime? expiresAt;
-  final DateTime? createdAt;
+  final DateTime createdAt;
 
   LinkedAccount({
     required this.object,
@@ -516,7 +516,7 @@ class LinkedAccount {
     this.failureMessage,
     this.registeredAt,
     this.expiresAt,
-    this.createdAt,
+    required this.createdAt,
   });
 
   factory LinkedAccount.fromJson(Map<String, dynamic> json) {
@@ -530,7 +530,7 @@ class LinkedAccount {
       type: json['type'],
       status: json['status'],
       lastDigits: json['last_digits'],
-      metadata: Map<String, dynamic>.from(json['metadata'] ?? {}),
+      metadata: Map<String, dynamic>.from(json['metadata']),
       failureCode: json['failure_code'],
       failureMessage: json['failure_message'],
       registeredAt: json['registered_at'] != null
@@ -539,9 +539,7 @@ class LinkedAccount {
       expiresAt: json['expires_at'] != null
           ? DateTime.parse(json['expires_at'])
           : null,
-      createdAt: json['created_at'] != null
-          ? DateTime.parse(json['created_at'])
-          : null,
+      createdAt: DateTime.parse(json['created_at']),
     );
   }
 
@@ -561,7 +559,7 @@ class LinkedAccount {
       'failure_message': failureMessage,
       'registered_at': registeredAt?.toIso8601StringWithoutMilliseconds(),
       'expires_at': expiresAt?.toIso8601StringWithoutMilliseconds(),
-      'created_at': createdAt?.toIso8601StringWithoutMilliseconds(),
+      'created_at': createdAt.toIso8601StringWithoutMilliseconds(),
     };
   }
 }
