@@ -1,5 +1,6 @@
 import 'package:omise_dart/src/omise_http_client.dart';
 import 'package:omise_dart/src/services/capability_api.dart';
+import 'package:omise_dart/src/services/charges_api.dart';
 import 'package:omise_dart/src/services/sources_api.dart';
 import 'package:omise_dart/src/services/tokens_api.dart';
 import 'package:omise_dart/src/utils.dart';
@@ -49,6 +50,7 @@ class OmiseApi {
     tokens = TokensApi(omiseHttpClient);
     capability = CapabilityApi(omiseHttpClient);
     sources = SourcesApi(omiseHttpClient);
+    charges = ChargesApi(omiseHttpClient);
   }
 
   /// Provides access to the [TokensApi], which includes methods for creating and retrieving tokens.
@@ -59,4 +61,7 @@ class OmiseApi {
 
   /// Provides access to the [SourcesApi], which includes methods for creating and retrieving sources.
   late SourcesApi sources;
+
+  /// Provides access to the [ChargesApi], which includes methods for creating and retrieving charges.
+  late ChargesApi charges;
 }
