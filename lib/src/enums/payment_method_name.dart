@@ -10,8 +10,6 @@ enum PaymentMethodName {
   installmentFirstChoice('installment_first_choice'),
   installmentKbank('installment_kbank'),
   installmentKtc('installment_ktc'),
-  installmentPaynextExtraJumpapp('installment_paynext_extra_jumpapp'),
-  installmentPaynextExtraQr('installment_paynext_extra_qr'),
   installmentScb('installment_scb'),
   installmentUob('installment_uob'),
   installmentTtb('installment_ttb'),

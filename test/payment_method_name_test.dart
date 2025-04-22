@@ -54,13 +54,6 @@ void main() {
           equals(PaymentMethodName.gcash));
       expect(PaymentMethodNameExtension.fromString('grabpay'),
           equals(PaymentMethodName.grabpay));
-      expect(
-          PaymentMethodNameExtension.fromString(
-              'installment_paynext_extra_jumpapp'),
-          equals(PaymentMethodName.installmentPaynextExtraJumpapp));
-      expect(
-          PaymentMethodNameExtension.fromString('installment_paynext_extra_qr'),
-          equals(PaymentMethodName.installmentPaynextExtraQr));
       expect(PaymentMethodNameExtension.fromString('installment_scb'),
           equals(PaymentMethodName.installmentScb));
       expect(PaymentMethodNameExtension.fromString('installment_ttb'),
