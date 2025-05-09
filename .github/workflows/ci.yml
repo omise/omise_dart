@@ -22,8 +22,11 @@ jobs:
           flutter pub get
 
       - name: Run Dart tests with coverage
+        # The flutter command is silently executed since we only want the coverage report generated
+        # but the dart command does not generate the lcov file.
         run: |
           dart test --coverage=coverage
+          flutter test --coverage > /dev/null 2>&1
           ls -l coverage/lcov.info
 
       - name: Run analysis (Dart)
