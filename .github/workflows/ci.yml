@@ -21,13 +21,21 @@ jobs:
           cd example/flutter_example
           flutter pub get
 
-      - name: Analyze (Check if distributable for Dart)
+      - name: Run Dart tests with coverage
+        run: |
+          dart test --coverage=coverage
+          ls -l coverage/lcov.info
+
+      - name: Run analysis (Dart)
         run: dart analyze
 
-      - name: Run Tests
-        run: dart test
-
-      - name: Analyze (Check if distributable for Flutter)
+      - name: Run analysis (Flutter)
         run: |
           cd example/flutter_example
           flutter analyze
+
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v1.2.1
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: https://sonarcloud.io
