@@ -21,13 +21,24 @@ jobs:
           cd example/flutter_example
           flutter pub get
 
-      - name: Analyze (Check if distributable for Dart)
+      - name: Run Dart tests with coverage
+        # The flutter command is silently executed since we only want the coverage report generated
+        # but the dart command does not generate the lcov file.
+        run: |
+          dart test --coverage=coverage
+          flutter test --coverage > /dev/null 2>&1 || true
+          ls -l coverage/lcov.info
+
+      - name: Run analysis (Dart)
         run: dart analyze
 
-      - name: Run Tests
-        run: dart test
-
-      - name: Analyze (Check if distributable for Flutter)
+      - name: Run analysis (Flutter)
         run: |
           cd example/flutter_example
           flutter analyze
+
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v5.2.0
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: https://sonarcloud.io
