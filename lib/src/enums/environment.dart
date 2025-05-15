@@ -1,8 +1,22 @@
 enum Environment {
-  baseUrl(value: "https://api.omise.co"),
-  baseVaultUrl(value: "https://vault.omise.co");
+  production,
+  staging;
 
-  final String value;
+  String getBaseUrl() {
+    switch (this) {
+      case Environment.production:
+        return 'https://api.omise.co';
+      case Environment.staging:
+        return String.fromEnvironment('BASE_STAGING_URL');
+    }
+  }
 
-  const Environment({required this.value});
+  String getBaseVaultUrl() {
+    switch (this) {
+      case Environment.production:
+        return 'https://vault.omise.co';
+      case Environment.staging:
+        return String.fromEnvironment('BASE_STAGING_VAULT_URL');
+    }
+  }
 }

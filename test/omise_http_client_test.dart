@@ -9,7 +9,7 @@ import 'package:omise_dart/src/exceptions/omise_api_exception.dart';
 
 void main() {
   group('OmiseHttpClient Tests', () {
-    final baseUrl = Environment.baseUrl.value;
+    final baseUrl = Environment.production.getBaseUrl();
     late MockClient mockClient;
     late OmiseHttpClient omiseHttpClient;
 

@@ -30,6 +30,7 @@ class OmiseHttpClient {
     http.Client? httpClient,
     this.enableDebug = false,
     this.ignoreNullKeys = true,
+    this.environment,
   }) : _httpClient = httpClient ?? http.Client() {
     if ([null, true].contains(publicKey?.isEmpty) &&
         [null, true].contains(secretKey?.isEmpty)) {
@@ -41,9 +42,6 @@ class OmiseHttpClient {
 
   /// For testing purposes and passing custom client
   final http.Client _httpClient;
-
-  /// The base URL for the Omise API.
-  String baseUrl = Environment.baseUrl.value;
 
   /// The version of the Omise API to use.
   final String apiVersion = "2019-05-29";
@@ -63,11 +61,15 @@ class OmiseHttpClient {
   /// Wether to send keys with null values in the request body or not
   final bool? ignoreNullKeys;
 
+  // The api environment to be used.
+  final Environment? environment;
+
   String getBaseUrl(String path) {
+    final env = environment ?? Environment.production;
     if (path.contains('token')) {
-      return Environment.baseVaultUrl.value;
+      return env.getBaseVaultUrl();
     }
-    return Environment.baseUrl.value;
+    return env.getBaseUrl();
   }
 
   /// Retrieves a user agent string that includes the Dart SDK version, the SDK package information,

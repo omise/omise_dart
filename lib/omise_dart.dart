@@ -19,3 +19,4 @@ export 'src/exceptions/omise_api_exception.dart';
 export 'src/enums/authorization_type.dart';
 export 'src/enums/dispute_status.dart';
 export 'src/enums/absorption_type.dart';
+export 'src/enums/environment.dart';
