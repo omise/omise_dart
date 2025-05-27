@@ -7,7 +7,7 @@ enum Environment {
       case Environment.production:
         return 'https://api.omise.co';
       case Environment.staging:
-        return String.fromEnvironment('BASE_STAGING_URL');
+        return const String.fromEnvironment('BASE_STAGING_URL');
     }
   }
 
@@ -16,7 +16,7 @@ enum Environment {
       case Environment.production:
         return 'https://vault.omise.co';
       case Environment.staging:
-        return String.fromEnvironment('BASE_STAGING_VAULT_URL');
+        return const String.fromEnvironment('BASE_STAGING_VAULT_URL');
     }
   }
 }
