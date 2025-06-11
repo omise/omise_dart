@@ -1,3 +1,4 @@
+import 'package:omise_dart/src/enums/environment.dart';
 import 'package:omise_dart/src/omise_http_client.dart';
 import 'package:omise_dart/src/services/capability_api.dart';
 import 'package:omise_dart/src/services/charges_api.dart';
@@ -19,6 +20,7 @@ class OmiseApi {
   /// - [enableDebug]: A boolean to enable debug logging (optional).
   /// - [ignoreNullKeys]: A boolean to ignore null values when sending API requests (optional).
   /// - [userAgent]: A custom user agent string to identify the client (optional).
+  /// - [environment]: The api environment to be used (optional).
   ///
   /// These parameters are passed to the [OmiseHttpClient], which is used by
   /// [TokensApi] for making HTTP requests.
@@ -33,6 +35,7 @@ class OmiseApi {
     bool? enableDebug,
     bool? ignoreNullKeys,
     String? userAgent,
+    Environment? environment,
   }) {
     if (secretKey != null) {
       Utils.isFrontEndEnvironment();
@@ -44,6 +47,7 @@ class OmiseApi {
       enableDebug: enableDebug,
       ignoreNullKeys: ignoreNullKeys,
       userAgent: userAgent,
+      environment: environment,
     );
 
     // Initialize the APIs
