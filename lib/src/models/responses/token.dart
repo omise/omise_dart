@@ -63,8 +63,8 @@ class Card extends BaseResponse {
   final String? firstDigits;
   final String lastDigits;
   final String name;
-  final int expirationMonth;
-  final int expirationYear;
+  final int? expirationMonth;
+  final int? expirationYear;
   final bool securityCodeCheck;
   final String? tokenizationMethod;
   final String createdAt;
