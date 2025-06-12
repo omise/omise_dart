@@ -1,3 +1,9 @@
+## 0.7.0
+
+### Added
+
+- Support charge creation.
+
 ## 0.6.0
 
 ### Added

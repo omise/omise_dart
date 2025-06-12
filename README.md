@@ -15,7 +15,7 @@ To use the package, first add it to your project by including the following in y
 
 ```yaml
 dependencies:
-  omise_dart: ^0.6.0
+  omise_dart: ^0.7.0
 ```
 
 Then, run:
@@ -76,6 +76,8 @@ In the `example/` folder, you will find more comprehensive examples showing vari
 
 - Creating a token
 - Fetching a token
+- Creating a charge
+- Fetching a charge
 - Fetching capability object.
 
 To run the examples:
