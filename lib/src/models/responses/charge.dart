@@ -1,6 +1,9 @@
-import 'package:omise_dart/omise_dart.dart';
+import 'package:omise_dart/src/enums/authentication_type.dart';
+import 'package:omise_dart/src/enums/charge_status.dart';
+import 'package:omise_dart/src/enums/currency.dart';
 import 'package:omise_dart/src/enums/dispute_status.dart';
 import 'package:omise_dart/src/extensions/date_time_no_milliseconds.dart';
+import 'package:omise_dart/src/models/responses/source.dart';
 
 class Charge {
   final String object;
@@ -70,6 +73,7 @@ class Charge {
   final UnmanagedPayment? unmanagedPayment;
   final bool voided;
   final bool zeroInterestInstallments;
+  final AuthenticationType? authenticatedBy;
 
   Charge({
     required this.object,
@@ -139,101 +143,102 @@ class Charge {
     this.unmanagedPayment,
     required this.voided,
     required this.zeroInterestInstallments,
+    this.authenticatedBy,
   });
 
   factory Charge.fromJson(Map<String, dynamic> json) => Charge(
-        object: json['object'],
-        id: json['id'],
-        livemode: json['livemode'],
-        location: json['location'],
-        acquirerReferenceNumber: json['acquirer_reference_number'],
-        amount: json['amount'],
-        approvalCode: json['approval_code'],
-        authorizationType: json['authorization_type'],
-        authorizeUri: json['authorize_uri'],
-        authorized: json['authorized'],
-        authorizedAmount: json['authorized_amount'],
-        authorizedAt: json['authorized_at'] != null
-            ? DateTime.parse(json['authorized_at'])
-            : null,
-        branch: json['branch'],
-        canPerformVoid: json['can_perform_void'],
-        capturable: json['capturable'],
-        capture: json['capture'],
-        capturedAmount: json['captured_amount'],
-        card: json['card'] != null ? CardModel.fromJson(json['card']) : null,
-        createdAt: DateTime.parse(json['created_at']),
-        currency: CurrencyExtension.fromString(json['currency']),
-        customer: json['customer'],
-        description: json['description'],
-        device: json['device'],
-        disputable: json['disputable'],
-        dispute:
-            json['dispute'] != null ? Dispute.fromJson(json['dispute']) : null,
-        expired: json['expired'],
-        expiredAt: json['expired_at'] != null
-            ? DateTime.parse(json['expired_at'])
-            : null,
-        expiresAt: json['expires_at'] != null
-            ? DateTime.parse(json['expires_at'])
-            : null,
-        failureCode: json['failure_code'],
-        failureMessage: json['failure_message'],
-        fee: json['fee'],
-        feeVat: json['fee_vat'],
-        fundingAmount: json['funding_amount'],
-        fundingCurrency: json['funding_currency'],
-        interest: json['interest'],
-        interestVat: json['interest_vat'],
-        ip: json['ip'],
-        link: json['link'],
-        linkedAccount: json['linked_account'] != null
-            ? LinkedAccount.fromJson(json['linked_account'])
-            : null,
-        merchantAdvice: json['merchant_advice'],
-        merchantAdviceCode: json['merchant_advice_code'],
-        merchantName: json['merchant_name'],
-        merchantUid: json['merchant_uid'],
-        metadata: json['metadata'] != null
-            ? Map<String, dynamic>.from(json['metadata'])
-            : null,
-        missing3dsFields: json['missing_3ds_fields'],
-        multiCapture: json['multi_capture'],
-        net: json['net'],
-        paid: json['paid'],
-        paidAt:
-            json['paid_at'] != null ? DateTime.parse(json['paid_at']) : null,
-        partiallyRefundable: json['partially_refundable'],
-        platformFee: json['platform_fee'] != null
-            ? PlatformFee.fromJson(json['platform_fee'])
-            : null,
-        refundable: json['refundable'],
-        refundedAmount: json['refunded_amount'],
-        refunds: json['refunds']?['data'] != null
-            ? (json['refunds']?['data'] as List)
-                .map((refund) => Refund.fromJson(refund))
-                .toList()
-            : null,
-        returnUri: json['return_uri'],
-        reversed: json['reversed'],
-        reversedAt: json['reversed_at'] != null
-            ? DateTime.parse(json['reversed_at'])
-            : null,
-        reversible: json['reversible'],
-        schedule: json['schedule'],
-        source: json['source'] != null ? Source.fromJson(json['source']) : null,
-        status: ChargeStatusExtension.fromString(json['status']),
-        terminal: json['terminal'],
-        transaction: json['transaction'],
-        transactionFees: json['transaction_fees'] != null
-            ? TransactionFees.fromJson(json['transaction_fees'])
-            : null,
-        unmanagedPayment: json['unmanaged_payment'] != null
-            ? UnmanagedPayment.fromJson(json['unmanaged_payment'])
-            : null,
-        voided: json['voided'],
-        zeroInterestInstallments: json['zero_interest_installments'],
-      );
+      object: json['object'],
+      id: json['id'],
+      livemode: json['livemode'],
+      location: json['location'],
+      acquirerReferenceNumber: json['acquirer_reference_number'],
+      amount: json['amount'],
+      approvalCode: json['approval_code'],
+      authorizationType: json['authorization_type'],
+      authorizeUri: json['authorize_uri'],
+      authorized: json['authorized'],
+      authorizedAmount: json['authorized_amount'],
+      authorizedAt: json['authorized_at'] != null
+          ? DateTime.parse(json['authorized_at'])
+          : null,
+      branch: json['branch'],
+      canPerformVoid: json['can_perform_void'],
+      capturable: json['capturable'],
+      capture: json['capture'],
+      capturedAmount: json['captured_amount'],
+      card: json['card'] != null ? CardModel.fromJson(json['card']) : null,
+      createdAt: DateTime.parse(json['created_at']),
+      currency: CurrencyExtension.fromString(json['currency']),
+      customer: json['customer'],
+      description: json['description'],
+      device: json['device'],
+      disputable: json['disputable'],
+      dispute:
+          json['dispute'] != null ? Dispute.fromJson(json['dispute']) : null,
+      expired: json['expired'],
+      expiredAt: json['expired_at'] != null
+          ? DateTime.parse(json['expired_at'])
+          : null,
+      expiresAt: json['expires_at'] != null
+          ? DateTime.parse(json['expires_at'])
+          : null,
+      failureCode: json['failure_code'],
+      failureMessage: json['failure_message'],
+      fee: json['fee'],
+      feeVat: json['fee_vat'],
+      fundingAmount: json['funding_amount'],
+      fundingCurrency: json['funding_currency'],
+      interest: json['interest'],
+      interestVat: json['interest_vat'],
+      ip: json['ip'],
+      link: json['link'],
+      linkedAccount: json['linked_account'] != null
+          ? LinkedAccount.fromJson(json['linked_account'])
+          : null,
+      merchantAdvice: json['merchant_advice'],
+      merchantAdviceCode: json['merchant_advice_code'],
+      merchantName: json['merchant_name'],
+      merchantUid: json['merchant_uid'],
+      metadata: json['metadata'] != null
+          ? Map<String, dynamic>.from(json['metadata'])
+          : null,
+      missing3dsFields: json['missing_3ds_fields'],
+      multiCapture: json['multi_capture'],
+      net: json['net'],
+      paid: json['paid'],
+      paidAt: json['paid_at'] != null ? DateTime.parse(json['paid_at']) : null,
+      partiallyRefundable: json['partially_refundable'],
+      platformFee: json['platform_fee'] != null
+          ? PlatformFee.fromJson(json['platform_fee'])
+          : null,
+      refundable: json['refundable'],
+      refundedAmount: json['refunded_amount'],
+      refunds: json['refunds']?['data'] != null
+          ? (json['refunds']?['data'] as List)
+              .map((refund) => Refund.fromJson(refund))
+              .toList()
+          : null,
+      returnUri: json['return_uri'],
+      reversed: json['reversed'],
+      reversedAt: json['reversed_at'] != null
+          ? DateTime.parse(json['reversed_at'])
+          : null,
+      reversible: json['reversible'],
+      schedule: json['schedule'],
+      source: json['source'] != null ? Source.fromJson(json['source']) : null,
+      status: ChargeStatusExtension.fromString(json['status']),
+      terminal: json['terminal'],
+      transaction: json['transaction'],
+      transactionFees: json['transaction_fees'] != null
+          ? TransactionFees.fromJson(json['transaction_fees'])
+          : null,
+      unmanagedPayment: json['unmanaged_payment'] != null
+          ? UnmanagedPayment.fromJson(json['unmanaged_payment'])
+          : null,
+      voided: json['voided'],
+      zeroInterestInstallments: json['zero_interest_installments'],
+      authenticatedBy:
+          AuthenticationTypeExtension.fromString(json['authenticated_by']));
 
   Map<String, dynamic> toJson() => {
         'object': object,
@@ -303,6 +308,7 @@ class Charge {
         'unmanaged_payment': unmanagedPayment?.toJson(),
         'voided': voided,
         'zero_interest_installments': zeroInterestInstallments,
+        'authenticated_by': authenticatedBy?.value
       };
 }
 

@@ -1,3 +1,4 @@
+import 'package:omise_dart/src/enums/authentication_type.dart';
 import 'package:omise_dart/src/extensions/date_time_no_milliseconds.dart';
 import 'package:test/test.dart';
 import 'package:omise_dart/omise_dart.dart';
@@ -6,26 +7,26 @@ void main() {
   group('CreateChargeRequest', () {
     test('toJson should convert CreateChargeRequest to correct map', () {
       final request = CreateChargeRequest(
-        amount: 5000,
-        currency: Currency.thb,
-        authorizationType: AuthorizationType.preAuth,
-        capture: true,
-        card: 'card_123',
-        customer: 'cust_456',
-        description: 'Test charge',
-        expiresAt: DateTime.utc(2025, 4, 1, 12),
-        firstCharge: 'charge_001',
-        ip: '127.0.0.1',
-        linkedAccount: 'link_789',
-        metadata: {'order_id': 'A123'},
-        platformFee: PlatformFeeRequest(fixed: 100, percentage: 2.5),
-        recurringReason: 'monthly subscription',
-        returnUri: 'https://example.com/return',
-        source: 'source_987',
-        transactionIndicator: 'ecommerce',
-        webhookEndpoints: ['https://webhook.site/test'],
-        zeroInterestInstallments: false,
-      );
+          amount: 5000,
+          currency: Currency.thb,
+          authorizationType: AuthorizationType.preAuth,
+          capture: true,
+          card: 'card_123',
+          customer: 'cust_456',
+          description: 'Test charge',
+          expiresAt: DateTime.utc(2025, 4, 1, 12),
+          firstCharge: 'charge_001',
+          ip: '127.0.0.1',
+          linkedAccount: 'link_789',
+          metadata: {'order_id': 'A123'},
+          platformFee: PlatformFeeRequest(fixed: 100, percentage: 2.5),
+          recurringReason: 'monthly subscription',
+          returnUri: 'https://example.com/return',
+          source: 'source_987',
+          transactionIndicator: 'ecommerce',
+          webhookEndpoints: ['https://webhook.site/test'],
+          zeroInterestInstallments: false,
+          authentication: AuthenticationType.passKey);
 
       final json = request.toJson();
 
@@ -49,6 +50,7 @@ void main() {
       expect(json['transaction_indicator'], 'ecommerce');
       expect(json['webhook_endpoints'][0], 'https://webhook.site/test');
       expect(json['zero_interest_installments'], false);
+      expect(json['authentication'], "PASSKEY");
     });
 
     test('fromJson should create CreateChargeRequest from map correctly', () {
@@ -75,6 +77,7 @@ void main() {
         'transaction_indicator': 'ecommerce',
         'webhook_endpoints': ['https://webhook.site/test'],
         'zero_interest_installments': false,
+        "authentication": "PASSKEY"
       };
 
       final request = CreateChargeRequest.fromJson(json);
@@ -100,30 +103,31 @@ void main() {
       expect(request.transactionIndicator, 'ecommerce');
       expect(request.webhookEndpoints?[0], 'https://webhook.site/test');
       expect(request.zeroInterestInstallments, false);
+      expect(request.authentication, AuthenticationType.passKey);
     });
 
     test('toJson and fromJson should work together', () {
       final original = CreateChargeRequest(
-        amount: 5000,
-        currency: Currency.thb,
-        authorizationType: AuthorizationType.preAuth,
-        capture: true,
-        card: 'card_123',
-        customer: 'cust_456',
-        description: 'Test charge',
-        expiresAt: DateTime.utc(2025, 4, 1, 12),
-        firstCharge: 'charge_001',
-        ip: '127.0.0.1',
-        linkedAccount: 'link_789',
-        metadata: {'order_id': 'A123'},
-        platformFee: PlatformFeeRequest(fixed: 100, percentage: 2.5),
-        recurringReason: 'monthly subscription',
-        returnUri: 'https://example.com/return',
-        source: 'source_987',
-        transactionIndicator: 'ecommerce',
-        webhookEndpoints: ['https://webhook.site/test'],
-        zeroInterestInstallments: false,
-      );
+          amount: 5000,
+          currency: Currency.thb,
+          authorizationType: AuthorizationType.preAuth,
+          capture: true,
+          card: 'card_123',
+          customer: 'cust_456',
+          description: 'Test charge',
+          expiresAt: DateTime.utc(2025, 4, 1, 12),
+          firstCharge: 'charge_001',
+          ip: '127.0.0.1',
+          linkedAccount: 'link_789',
+          metadata: {'order_id': 'A123'},
+          platformFee: PlatformFeeRequest(fixed: 100, percentage: 2.5),
+          recurringReason: 'monthly subscription',
+          returnUri: 'https://example.com/return',
+          source: 'source_987',
+          transactionIndicator: 'ecommerce',
+          webhookEndpoints: ['https://webhook.site/test'],
+          zeroInterestInstallments: false,
+          authentication: AuthenticationType.passKey);
 
       final json = original.toJson();
       final newRequest = CreateChargeRequest.fromJson(json);
@@ -151,6 +155,7 @@ void main() {
       expect(newRequest.webhookEndpoints, original.webhookEndpoints);
       expect(newRequest.zeroInterestInstallments,
           original.zeroInterestInstallments);
+      expect(newRequest.authentication, original.authentication);
     });
   });
 }
