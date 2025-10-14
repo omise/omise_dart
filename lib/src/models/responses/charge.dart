@@ -308,7 +308,7 @@ class Charge {
         'unmanaged_payment': unmanagedPayment?.toJson(),
         'voided': voided,
         'zero_interest_installments': zeroInterestInstallments,
-        'authenticated_by': authenticatedBy?.value
+        'authenticated_by': authenticatedBy?.value,
       };
 }
 
