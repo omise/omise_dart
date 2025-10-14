@@ -70,6 +70,40 @@ For more details, refer to the [Omise API documentation on subunits](https://doc
 
 For more detailed examples, including how to get account capabilities, check the [example](example/) folder.
 
+# Passkey Integration
+
+The `omise_dart` SDK supports Passkey authentication for enhanced security and user experience. Passkey provides a passwordless authentication method that uses biometric authentication or device PINs, making payments more secure and convenient for users.
+
+## Prerequisites
+
+Before implementing Passkey authentication:
+
+- Ensure your Omise account supports Passkey authentication
+- Configure your frontend to collect proper card holder data (email/phoneNumber)
+
+## Implementation
+
+### Requesting Cardholder Data
+
+To use Passkey authentication, you must request cardholder data fields (email or phone number) during the payment process on the frontend. This information is required for the backend Passkey authentication setup.
+
+### Creating a Passkey Charge
+
+Once you have created a token on the frontend that includes the email/phoneNumber of the user, you can now use this token to create a passkey charge.
+To create a passkey charge you must set the `authentication` field in the charge request to `passKey`. This will trigger the required flows and you will also be able to check the `authenticatedBy` field in the charge response in order to check the actual authentication method. Here is an example code for creating a charge with the passkey flow:
+
+```dart
+final charge = await omiseApi.charges.create(
+    CreateChargeRequest(
+      amount: 2000,
+      currency: Currency.thb,
+      card: token.id,
+      returnUri: 'https://example.com/return',
+      authentication: AuthenticationType.passKey,
+    ),
+  );
+```
+
 ## Example
 
 In the `example/` folder, you will find more comprehensive examples showing various use cases, such as:
