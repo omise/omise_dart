@@ -1,3 +1,4 @@
+import 'package:omise_dart/src/enums/authentication_type.dart';
 import 'package:omise_dart/src/enums/authorization_type.dart';
 import 'package:omise_dart/src/enums/currency.dart';
 import 'package:omise_dart/src/extensions/date_time_no_milliseconds.dart';
@@ -22,6 +23,7 @@ class CreateChargeRequest {
   final String? transactionIndicator;
   final List<String>? webhookEndpoints;
   final bool? zeroInterestInstallments;
+  final AuthenticationType? authentication;
 
   CreateChargeRequest({
     required this.amount,
@@ -43,38 +45,41 @@ class CreateChargeRequest {
     this.transactionIndicator,
     this.webhookEndpoints,
     this.zeroInterestInstallments,
+    this.authentication,
   });
 
   factory CreateChargeRequest.fromJson(Map<String, dynamic> json) {
     return CreateChargeRequest(
-      amount: json['amount'],
-      currency: CurrencyExtension.fromString(json['currency']),
-      authorizationType: json['authorization_type'] != null
-          ? AuthorizationTypeExtension.fromString(json['authorization_type'])
-          : null,
-      capture: json['capture'],
-      card: json['card'],
-      customer: json['customer'],
-      description: json['description'],
-      expiresAt: json['expires_at'] != null
-          ? DateTime.parse(json['expires_at'])
-          : null,
-      firstCharge: json['first_charge'],
-      ip: json['ip'],
-      linkedAccount: json['linked_account'],
-      metadata: json['metadata'],
-      platformFee: json['platform_fee'] != null
-          ? PlatformFeeRequest.fromJson(json['platform_fee'])
-          : null,
-      recurringReason: json['recurring_reason'],
-      returnUri: json['return_uri'],
-      source: json['source'],
-      transactionIndicator: json['transaction_indicator'],
-      webhookEndpoints: (json['webhook_endpoints'] as List?)
-          ?.map((e) => e.toString())
-          .toList(),
-      zeroInterestInstallments: json['zero_interest_installments'],
-    );
+        amount: json['amount'],
+        currency: CurrencyExtension.fromString(json['currency']),
+        authorizationType: json['authorization_type'] != null
+            ? AuthorizationTypeExtension.fromString(json['authorization_type'])
+            : null,
+        capture: json['capture'],
+        card: json['card'],
+        customer: json['customer'],
+        description: json['description'],
+        expiresAt: json['expires_at'] != null
+            ? DateTime.parse(json['expires_at'])
+            : null,
+        firstCharge: json['first_charge'],
+        ip: json['ip'],
+        linkedAccount: json['linked_account'],
+        metadata: json['metadata'],
+        platformFee: json['platform_fee'] != null
+            ? PlatformFeeRequest.fromJson(json['platform_fee'])
+            : null,
+        recurringReason: json['recurring_reason'],
+        returnUri: json['return_uri'],
+        source: json['source'],
+        transactionIndicator: json['transaction_indicator'],
+        webhookEndpoints: (json['webhook_endpoints'] as List?)
+            ?.map((e) => e.toString())
+            .toList(),
+        zeroInterestInstallments: json['zero_interest_installments'],
+        authentication: json['authentication'] != null
+            ? AuthenticationTypeExtension.fromString(json['authentication'])
+            : null);
   }
 
   Map<String, dynamic> toJson() {
@@ -98,6 +103,7 @@ class CreateChargeRequest {
       'transaction_indicator': transactionIndicator,
       'webhook_endpoints': webhookEndpoints,
       'zero_interest_installments': zeroInterestInstallments,
+      'authentication': authentication?.value
     };
   }
 }
