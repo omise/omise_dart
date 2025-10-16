@@ -12,7 +12,7 @@ void main() {
     });
 
     test('should return correct package version', () {
-      expect(PackageInfo.packageVersion, '0.7.0');
+      expect(PackageInfo.packageVersion, '0.8.0');
     });
   });
 }

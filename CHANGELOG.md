@@ -1,3 +1,9 @@
+## 0.8.0
+
+### Added
+
+- Support TAS passkey suthentication flow for charge and token.
+
 ## 0.7.0
 
 ### Added
