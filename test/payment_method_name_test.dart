@@ -8,10 +8,6 @@ void main() {
         () {
       expect(PaymentMethodNameExtension.fromString('card'),
           equals(PaymentMethodName.card));
-      expect(PaymentMethodNameExtension.fromString('internet_banking_bay'),
-          equals(PaymentMethodName.internetBankingBay));
-      expect(PaymentMethodNameExtension.fromString('internet_banking_bbl'),
-          equals(PaymentMethodName.internetBankingBbl));
       expect(PaymentMethodNameExtension.fromString('alipay'),
           equals(PaymentMethodName.alipay));
       expect(PaymentMethodNameExtension.fromString('installment_bay'),

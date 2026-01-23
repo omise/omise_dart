@@ -1,7 +1,5 @@
 enum PaymentMethodName {
   card('card'),
-  internetBankingBay('internet_banking_bay'),
-  internetBankingBbl('internet_banking_bbl'),
   alipay('alipay'),
   alipayPlusMpm('alipayplus_mpm'),
   alipayPlusUpm('alipayplus_upm'),
